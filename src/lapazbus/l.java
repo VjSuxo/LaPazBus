@@ -28,6 +28,7 @@ public class l extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -36,6 +37,11 @@ public class l extends javax.swing.JFrame {
         jLabel1.setText("TE AMO MUCHO MI AMOR");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(90, 60, 316, 130);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lapazbus/img/descarga.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 400, 300);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -77,5 +83,6 @@ public class l extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
