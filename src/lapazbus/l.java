@@ -33,9 +33,9 @@ public class l extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
-        jLabel1.setText("TE AMO JOEL ");
+        jLabel1.setText("TE AMO MUCHO MI AMOR");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(60, 70, 316, 130);
+        jLabel1.setBounds(90, 60, 316, 130);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
