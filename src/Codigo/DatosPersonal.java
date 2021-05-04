@@ -9,6 +9,10 @@ package Codigo;
  *
  * @author Tostadora
  */
-public class DatosPersonal {
+public class DatosPersonal extends Datos{
+    
+    public DatosPersonal(String Nombre, String Ci, String Cargo, int Edad) {
+        super(Nombre, Ci, Cargo, Edad);
+    }
     
 }

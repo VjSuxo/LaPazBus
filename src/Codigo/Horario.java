@@ -10,5 +10,30 @@ package Codigo;
  * @author Tostadora
  */
 public class Horario {
+    private String Llegada;
+    private String Salida;
+
+    public Horario(String Llegada, String Salida) {
+        this.Llegada = Llegada;
+        this.Salida = Salida;
+    }
+
+    public String getLlegada() {
+        return Llegada;
+    }
+
+    public void setLlegada(String Llegada) {
+        this.Llegada = Llegada;
+    }
+
+    public String getSalida() {
+        return Salida;
+    }
+
+    public void setSalida(String Salida) {
+        this.Salida = Salida;
+    }
+    
+    
     
 }

@@ -11,4 +11,35 @@ package Codigo;
  */
 public class Bus {
     
+    private DatosPersonal[] Dp;
+    private Asiento[] Asiento;
+    private int Codigo;
+    private int AñoEmpleo;
+
+    public Bus(DatosPersonal[] Dp, Asiento[] Asiento, int Codigo, int AñoEmpleo) {
+        this.Dp = Dp;
+        this.Asiento = Asiento;
+        this.Codigo = Codigo;
+        this.AñoEmpleo = AñoEmpleo;
+        
+    }
+
+    public DatosPersonal[] getDp() {
+        return Dp;
+    }
+
+    public Asiento[] getAsiento() {
+        return Asiento;
+    }
+
+    public int getCodigo() {
+        return Codigo;
+    }
+
+    public int getAñoEmpleo() {
+        return AñoEmpleo;
+    }
+    
+    
+    
 }
