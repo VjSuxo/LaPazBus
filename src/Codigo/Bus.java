@@ -24,8 +24,8 @@ public class Bus {
         
     }
 
-    public DatosPersonal[] getDp() {
-        return Dp;
+    public DatosPersonal getDp() {
+        return Dp[0];
     }
 
     public Asiento[] getAsiento() {

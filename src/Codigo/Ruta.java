@@ -31,7 +31,7 @@ public class Ruta {
         this.NombreRuta = NombreRuta;
     }
 
-    public Bus[] getBuses() {
+    public Bus[] getBuses() {                
         return Buses;
     }
 
@@ -54,7 +54,7 @@ public class Ruta {
     public void setP(Parada P) {
         this.P = P;
     }
-    
+        
     
     
 }
