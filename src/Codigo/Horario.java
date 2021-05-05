@@ -12,10 +12,20 @@ package Codigo;
 public class Horario {
     private String Llegada;
     private String Salida;
+    private int Frecuencia;
 
-    public Horario(String Llegada, String Salida) {
+    public Horario(String Llegada, String Salida,int Frecuencia) {
         this.Llegada = Llegada;
         this.Salida = Salida;
+        this.Frecuencia = Frecuencia;
+    }
+
+    public int getFrecuencia() {
+        return Frecuencia;
+    }
+
+    public void setFrecuencia(int Frecuencia) {
+        this.Frecuencia = Frecuencia;
     }
 
     public String getLlegada() {

@@ -17,8 +17,8 @@ public class Ruta {
     private Horario[] H;
     private int Hindice=0,Hcant=0;
     private Parada P;
-
-    public Ruta(String NombreRuta, Bus[] Buses, Horario[] H, Parada P) {
+    private Tarifa T;
+    public Ruta(String NombreRuta, Bus[] Buses, Horario[] H, Parada P,Tarifa t) {
         this.NombreRuta = NombreRuta;
         this.Bindice = Buses.length;
         this.Bcant = Bindice;
@@ -32,6 +32,7 @@ public class Ruta {
         }
         this.H = H;
         this.P = P;
+        this.T = t;
     }
 
     public String getNombreRuta() {
