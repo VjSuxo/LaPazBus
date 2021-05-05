@@ -13,12 +13,23 @@ public class Ruta {
     
     private String NombreRuta;
     private Bus[] Buses;
+    private int Bindice=0,Bcant=0;
     private Horario[] H;
+    private int Hindice=0,Hcant=0;
     private Parada P;
 
     public Ruta(String NombreRuta, Bus[] Buses, Horario[] H, Parada P) {
         this.NombreRuta = NombreRuta;
-        this.Buses = Buses;
+        this.Bindice = Buses.length;
+        this.Bcant = Bindice;
+        for (int i = 0; i < this.Bcant; i++) {
+            this.Buses[i] = Buses[i];
+        }
+        this.Hindice = H.length;
+        Hcant = Hindice;
+        for (int i = 0; i < Hcant; i++) {
+            this.H[i] = H[i];
+        }
         this.H = H;
         this.P = P;
     }
@@ -31,20 +42,41 @@ public class Ruta {
         this.NombreRuta = NombreRuta;
     }
 
-    public Bus[] getBuses() {                
-        return Buses;
+    public Bus getBuses() {         
+        
+        Bus data = Buses[Bindice];
+        if (Bindice>0){
+            data = Buses[Bindice];
+            Bindice--;
+        }
+        if(Bindice<=0){
+            Bindice = Bcant;
+        }
+        return data;
     }
 
-    public void setBuses(Bus[] Buses) {
-        this.Buses = Buses;
+    public void setBuses(Bus buses) {
+        this.Buses[Bcant] = buses;
+        Bcant++;
     }
 
-    public Horario[] getH() {
-        return H;
+    public Horario getH() {
+        Horario data = null;
+        
+        if (Hindice>0){
+            data = H[Hindice];
+            Hindice--;
+        }
+        if(Hindice<=0){
+            Hindice = Hcant;
+        }
+        
+        return data;
     }
 
-    public void setH(Horario[] H) {
-        this.H = H;
+    public void setH(Horario h) {
+        this.H[Hcant] = h;
+        Hcant++;
     }
 
     public Parada getP() {
