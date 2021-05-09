@@ -16,22 +16,31 @@ public class Ruta {
     private int Bindice=0,Bcant=0;
     private Horario[] H;
     private int Hindice=0,Hcant=0;
-    private Parada P;
-    private Tarifa T;
-    public Ruta(String NombreRuta, Bus[] Buses, Horario[] H, Parada P,Tarifa t) {
+    private Parada P[];
+    private int Pindice=0,Pcant=0;
+    private Tarifa[] T;
+    private int Tindice=0,Tcant=0;
+    public Ruta(String NombreRuta, Bus[] Buses, Horario[] H, Parada P[],Tarifa[] t) {
+        
         this.NombreRuta = NombreRuta;
+        
         this.Bindice = Buses.length;
         this.Bcant = Bindice;
         for (int i = 0; i < this.Bcant; i++) {
             this.Buses[i] = Buses[i];
         }
+        
         this.Hindice = H.length;
         Hcant = Hindice;
         for (int i = 0; i < Hcant; i++) {
             this.H[i] = H[i];
         }
-        this.H = H;
-        this.P = P;
+        
+        this.Pindice = P.length;
+        Pcant = Pindice;
+        for (int i = 0; i < Pcant; i++) {
+            this.P[i] = P[i];
+        }
         this.T = t;
     }
 
@@ -52,6 +61,7 @@ public class Ruta {
         }
         if(Bindice<=0){
             Bindice = Bcant;
+            data = Buses[Bindice];
         }
         return data;
     }
@@ -70,6 +80,7 @@ public class Ruta {
         }
         if(Hindice<=0){
             Hindice = Hcant;
+            data = H[Hindice];
         }
         
         return data;
@@ -81,11 +92,42 @@ public class Ruta {
     }
 
     public Parada getP() {
-        return P;
+        Parada data = null;
+        
+        if (Pindice>0){
+            data = P[Pindice];
+            Pindice--;
+        }
+        if(Pindice<=0){
+            Pindice = Pcant;
+            data = P[Pindice];
+        }
+        
+        return data;
     }
 
-    public void setP(Parada P) {
-        this.P = P;
+    public void setP(Parada p) {
+        this.P[Pcant] = p;
+        Pcant++;
+    }
+
+    public Tarifa getT() {
+        Tarifa data = null;
+        
+        if (Tindice>0){
+            data = T[Tindice];
+            Tindice--;
+        }
+        if(Tindice<=0){
+            Tindice = Tcant;
+            data = T[Tindice];
+        }
+        return data;
+    }
+
+    public void setT(Tarifa t) {
+        this.T[Pcant] = t;
+        Tcant++;
     }
         
     
