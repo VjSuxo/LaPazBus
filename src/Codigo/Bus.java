@@ -24,26 +24,30 @@ public class Bus {
         this.Codigo = Codigo;
         this.AñoEmpleo = AñoEmpleo;
         
-        this.Acant = Asiento.length;
-        this.Aindice = Asiento.length;
+        this.Acant = Asiento.length; 
+        this.Asiento = new Asiento[Acant];
         for (int i = 0; i < Acant; i++) {
             this.Asiento[i] = Asiento[i];
         }
+        
         this.DPcant = Dp.length;
-        this.DPindice= DPcant;
+        this.Dp = new DatosPersonal[DPcant];
         for (int i = 0; i < DPcant; i++) {
+            DatosPersonal d = Dp[i];
             this.Dp[i]=Dp[i];
         }
     }
 
     public DatosPersonal getDp() {
         DatosPersonal data = null;
-        if (DPindice>0){
+        if (DPindice<DPcant){
             data = Dp[DPindice];
-            DPindice--;
+            DPindice++;
         }
-        if(DPindice<=0){
-            DPindice = DPcant;
+        else{
+            System.out.println(DPindice);
+            DPindice = 0;
+            data = null;
         }
         
         return data;
@@ -52,12 +56,13 @@ public class Bus {
     public Asiento getAsiento() {
         
         Asiento data = null;
-        if (Aindice>0){
+        if (Aindice<Acant){
             data = Asiento[Aindice];
-            Aindice--;
+            Aindice++;
         }
-        if(Aindice<=0){
-            Aindice = Acant;
+        else{
+            Aindice = 0;
+            data = null;
         }
         return data;
     }
@@ -88,6 +93,22 @@ public class Bus {
 
     public void setAñoEmpleo(int AñoEmpleo) {
         this.AñoEmpleo = AñoEmpleo;
+    }
+
+    public int getDPcant() {
+        return DPcant;
+    }
+
+    public void setDPcant(int DPcant) {
+        this.DPcant = DPcant;
+    }
+
+    public int getAcant() {
+        return Acant;
+    }
+
+    public void setAcant(int Acant) {
+        this.Acant = Acant;
     }
     
     

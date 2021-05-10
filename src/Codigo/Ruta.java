@@ -24,24 +24,29 @@ public class Ruta {
         
         this.NombreRuta = NombreRuta;
         
-        this.Bindice = Buses.length;
-        this.Bcant = Bindice;
+        this.Bcant = Buses.length;
+        this.Buses = new Bus[Bcant];
         for (int i = 0; i < this.Bcant; i++) {
             this.Buses[i] = Buses[i];
         }
         
-        this.Hindice = H.length;
-        Hcant = Hindice;
+        this.Hcant = H.length;
+        this.H = new Horario[Hcant];
         for (int i = 0; i < Hcant; i++) {
             this.H[i] = H[i];
         }
         
-        this.Pindice = P.length;
-        Pcant = Pindice;
+        this.Pcant = P.length;
+        this.P = new Parada[Pcant];
         for (int i = 0; i < Pcant; i++) {
             this.P[i] = P[i];
         }
-        this.T = t;
+        
+        this.Tcant = t.length;
+        this.T = new Tarifa[Tcant];
+        for (int i = 0; i < Tcant; i++) {
+            this.T[i]=t[i];
+        }
     }
 
     public String getNombreRuta() {
@@ -55,13 +60,13 @@ public class Ruta {
     public Bus getBuses() {         
         
         Bus data = Buses[Bindice];
-        if (Bindice>0){
+        if (Bindice<=Bcant){
             data = Buses[Bindice];
-            Bindice--;
+            Bindice++;
         }
-        if(Bindice<=0){
-            Bindice = Bcant;
-            data = Buses[Bindice];
+        else{
+            Bindice = 0;
+            data = null;
         }
         return data;
     }
@@ -74,13 +79,13 @@ public class Ruta {
     public Horario getH() {
         Horario data = null;
         
-        if (Hindice>0){
+        if (Hindice<=Hcant){
             data = H[Hindice];
-            Hindice--;
+            Hindice++;
         }
-        if(Hindice<=0){
-            Hindice = Hcant;
-            data = H[Hindice];
+        else{
+            Hindice = 0;
+            data = null;
         }
         
         return data;
@@ -94,13 +99,13 @@ public class Ruta {
     public Parada getP() {
         Parada data = null;
         
-        if (Pindice>0){
+        if (Pindice<=Pcant){
             data = P[Pindice];
-            Pindice--;
+            Pindice++;
         }
-        if(Pindice<=0){
-            Pindice = Pcant;
-            data = P[Pindice];
+        else{
+            Pindice = 0;
+            data = null;
         }
         
         return data;
@@ -114,13 +119,13 @@ public class Ruta {
     public Tarifa getT() {
         Tarifa data = null;
         
-        if (Tindice>0){
+        if (Tindice<=Tcant){
             data = T[Tindice];
-            Tindice--;
+            Tindice++;
         }
-        if(Tindice<=0){
-            Tindice = Tcant;
-            data = T[Tindice];
+        else{
+            Tindice = 0;
+            data = null;
         }
         return data;
     }
@@ -128,6 +133,38 @@ public class Ruta {
     public void setT(Tarifa t) {
         this.T[Pcant] = t;
         Tcant++;
+    }
+
+    public int getBcant() {
+        return Bcant;
+    }
+
+    public void setBcant(int Bcant) {
+        this.Bcant = Bcant;
+    }
+
+    public int getHcant() {
+        return Hcant;
+    }
+
+    public void setHcant(int Hcant) {
+        this.Hcant = Hcant;
+    }
+
+    public int getPcant() {
+        return Pcant;
+    }
+
+    public void setPcant(int Pcant) {
+        this.Pcant = Pcant;
+    }
+
+    public int getTcant() {
+        return Tcant;
+    }
+
+    public void setTcant(int Tcant) {
+        this.Tcant = Tcant;
     }
         
     
