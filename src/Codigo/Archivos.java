@@ -33,18 +33,24 @@ public class Archivos {
     File archivo;
     
     public void crearCarpeta(){
-        System.out.println("Creando carpeta ");
+        System.out.println("Creando carpeta principal . . . ");
         File crear_carpeta = new File("LaPazBus");
         crear_carpeta.mkdir();
     }
     
-    public void crearCarpeta2(String nombre,String lugar){
-        System.out.println("Creando carpeta... "+nombre+lugar);
+    public void crearCarpeta(String nombre){
+        System.out.println("Creando carpeta... "+nombre);
         File crear_carpeta;
-        crear_carpeta = new File("LaPazBus\\"+nombre,lugar);
+        crear_carpeta = new File("LaPazBus\\"+nombre);
         crear_carpeta.mkdir();
     }
     
+    public void crearCarpeta(String carpeta,String nombre){
+        System.out.println("Creando carpeta en "+carpeta+" con nombre "+nombre);
+        File crear_carpeta;
+        crear_carpeta = new File("LaPazBus\\"+carpeta+"\\"+nombre);
+        crear_carpeta.mkdir();
+    }
     
     public int buscarCarpeta(String nombre){    
         int sw = 0;      

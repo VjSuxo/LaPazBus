@@ -99,13 +99,14 @@ public class Ruta {
     public Parada getP() {
         Parada data = null;
         
-        if (Pindice<=Pcant){
+        if (Pindice<Pcant){
             data = P[Pindice];
             Pindice++;
         }
         else{
             Pindice = 0;
-            data = null;
+            data = P[Pindice];
+            Pindice++;
         }
         
         return data;
