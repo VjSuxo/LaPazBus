@@ -20,6 +20,98 @@ public class LaPazBus {
         // TODO code application logic here
         
         PilaRuta pr = new PilaRuta();
+        PilaRuta aux = new PilaRuta();
+        Ruta ruta1 = Creacion();
+
+        pr.adiElem(ruta1);
+        aux.adiElem(ruta1);
+        Manipular(aux);
+        // manipulacion almacenamiento de datos
+        
+        Archivos arch = new Archivos();
+        
+        arch.crearCarpeta();
+           
+        arch.crearCarpeta("Ruta");
+        arch.crearCarpeta("Solicitudes");
+        
+        System.out.println("----------------------");
+        System.out.println("|Creando datos en Ruta|");
+        System.out.println("----------------------");
+        
+        Ruta rt = pr.eliminar();
+        // @param direccion = direccion donde se crearan las carpetas y archivos modifica
+        String direccion = "Ruta";
+        // crear carpeta ruta donde se almacenaran todos los objetos
+        arch.crearCarpeta("Ruta",rt.getNombreRuta());
+        direccion += "\\"+rt.getNombreRuta();
+        //@param direccionP = la direccon principal no cambia
+        String direccionP = direccion;
+        //Inicio de creacion de buses en la ruta
+        arch.crearCarpeta(direccion,"Bus");
+        direccion +="\\Bus"; 
+        for (int i = 0; i < rt.getBcant()-1; i++) {
+            
+            Bus b = rt.getBuses();
+            
+            arch.crearCarpeta(direccion,String.valueOf(b.getCodigo()));
+          
+            direccion += "\\"+String.valueOf(b.getCodigo());
+            String data = b.getCodigo()+"\n"+b.getAñoEmpleo();
+            arch.crearArchivos(direccion,"Data",data);
+                
+            //agrega los acientos del bus
+            arch.crearCarpeta(direccion,"Asiento");
+            for (int j = 0; j < b.getAcant(); j++) {
+                Asiento a = b.getAsiento();
+                data =  a.getTipo()+"\n"+a.isEstado()+"\n"+a.isSeccion();
+                arch.crearArchivos(direccion+"\\Asiento",j+a.getTipo(), data);
+                
+            }
+            
+            //agrega persona del bus
+            arch.crearCarpeta(direccion,"Personal");
+            for (int j = 0; j < b.getDPcant()-1; j++) {
+                DatosPersonal per = b.getDp();
+                data = per.getCi()+"\n"+per.getNombre()+"\n"+per.getEdad()+"\n"+per.getCargo();
+                arch.crearArchivos(direccion+"\\Personal",per.getCi(),data);
+                
+            }
+            
+        }
+        //fin de creacion de buses en la ruta
+    
+        //Creacion de paradas
+        direccion = direccionP;
+        arch.crearCarpeta(direccion,"Parada");
+        direccion +="\\Parada"; 
+        int sw = 0;
+        String CZona="";
+        String data;
+        for (int i = 0; i < rt.getPcant(); i++) {
+            Parada p = rt.getP();
+            String Zona = p.getZona();
+            if (Zona==CZona) {
+                if (sw==0) {
+                    arch.crearCarpeta(direccion, Zona);
+                    sw=1;
+                }
+                arch.crearArchivos(direccion+"\\"+Zona,p.getCalle(),p.getCalle());
+               
+            }
+            else{
+                CZona = Zona;
+                arch.crearCarpeta(direccion, Zona);
+                 arch.crearArchivos(direccion+"\\"+Zona,p.getCalle(),p.getCalle());
+            }
+        }
+    }
+    
+    
+    public static Ruta Creacion(){
+        
+        
+        
         DatosPersonal[] pv = new DatosPersonal[2];
             DatosPersonal persona = new DatosPersonal("Pepe","15937","Conductor", 10);
             pv[0] = persona;
@@ -172,17 +264,26 @@ public class LaPazBus {
         
         
         
-        pr.adiElem(ruta);
-        pr.mostrar();
         
-        Ruta rt = pr.eliminar();
+        return ruta;
+    }
+    
+    public static void Manipular(PilaRuta pr){
+    
+        PilaRuta aux = pr;
+        Ruta ruta;
+        aux.mostrar();
+         
+        Ruta rt = aux.eliminar();
+        ruta = rt;
+        
         
         System.out.println("Horario");
         System.out.println("");
         
         
         for (int i = 0; i < rt.getHcant()-1; i++) {
-             h = rt.getH();
+            Horario h = rt.getH();
             System.out.println("----------------------------");
             System.out.println("Llegada : "+h.getLlegada());
             System.out.println("Salida  : "+h.getSalida());
@@ -204,7 +305,7 @@ public class LaPazBus {
         
         System.out.println("----------------------");
         System.out.println("");
-        for (int i = 0; i < ruta.getPcant(); i++) {
+        for (int i = 0; i < ruta.getPcant()-1; i++) {
             Parada pa = ruta.getP();
             System.out.println("Parada :\n"+"Zona :"+ pa.getZona()+"\n Calle : \n"+pa.getCalle());
         }
@@ -217,12 +318,8 @@ public class LaPazBus {
             System.out.println("");
         }
         
-
-           
-           
         
-       
-        
+    
     }
     
 }
