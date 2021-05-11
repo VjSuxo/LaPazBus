@@ -65,8 +65,8 @@ public class Ruta {
             Bindice++;
         }
         else{
-            Bindice = 0;
-            data = null;
+            data = Buses[Bindice];
+            Bindice++;
         }
         return data;
     }
@@ -79,13 +79,14 @@ public class Ruta {
     public Horario getH() {
         Horario data = null;
         
-        if (Hindice<=Hcant){
+        if (Hindice<Hcant){
             data = H[Hindice];
             Hindice++;
         }
         else{
             Hindice = 0;
-            data = null;
+            data = H[Hindice];
+            Hindice++;
         }
         
         return data;
@@ -120,13 +121,14 @@ public class Ruta {
     public Tarifa getT() {
         Tarifa data = null;
         
-        if (Tindice<=Tcant){
+        if (Tindice<Tcant){
             data = T[Tindice];
             Tindice++;
         }
         else{
             Tindice = 0;
-            data = null;
+            data = T[Tindice];
+            Tindice++;
         }
         return data;
     }

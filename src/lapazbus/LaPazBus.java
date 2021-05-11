@@ -105,6 +105,47 @@ public class LaPazBus {
                  arch.crearArchivos(direccion+"\\"+Zona,p.getCalle(),p.getCalle());
             }
         }
+        //fin de creacion de paradas
+        
+        //creacion de horarios
+        
+        direccion = direccionP;
+        arch.crearCarpeta(direccion,"Horario");
+        direccion+="\\Horario";
+        for (int i = 0; i < rt.getHcant(); i++) {
+            Horario hh = rt.getH();
+            
+            arch.crearArchivos(direccion,i+"Llegada",hh.getLlegada());
+            arch.crearArchivos(direccion,i+"Salida",hh.getSalida());
+        }
+        //fin creacion de horarios
+        
+        //Creacion tarifa
+        direccion = direccionP;
+        arch.crearCarpeta(direccion,"Tarifa");
+        direccion+="\\Tarifa";
+        arch.crearCarpeta(direccion,"Tarjeta");
+        arch.crearCarpeta(direccion,"Efectivo");
+        arch.crearCarpeta(direccion,"Preferencial");
+        arch.crearCarpeta(direccion,"Universitario");
+        for (int i = 0; i < rt.getTcant(); i++) {
+            Tarifa tr = rt.getT();
+            if (tr.getTipoPago().equals("Tarjeta")) {
+                arch.crearArchivos(direccion+"\\Tarjeta",tr.getTurno(),String.valueOf(tr.getCosto()));
+            }
+            if (tr.getTipoPago().equals("Efectivo")) {
+                arch.crearArchivos(direccion+"\\Efectivo",tr.getTurno(),String.valueOf(tr.getCosto()));
+            }
+            if (tr.getTipoPago().equals("Preferencial")) {
+                arch.crearArchivos(direccion+"\\Preferencial",tr.getTurno(),String.valueOf(tr.getCosto()));
+            }
+            if (tr.getTipoPago().equals("Universitario")) {
+                arch.crearArchivos(direccion+"\\Universitario",tr.getTurno(),String.valueOf(tr.getCosto()));
+            }
+            
+           
+        }
+        
     }
     
     
@@ -216,7 +257,7 @@ public class LaPazBus {
         Bus[] busv = new Bus[2];
         busv[0] = bus;
         busv[1] = bus1;
-        Horario[] hv = new Horario[6];
+        Horario[] hv = new Horario[5];
         Horario h = new Horario("04:00", "11:00", 0);
         hv[0] = h;
         h = new Horario("11:00", "13:00", 0);
