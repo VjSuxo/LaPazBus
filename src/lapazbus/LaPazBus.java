@@ -168,7 +168,7 @@ public class LaPazBus {
     
     // Obtencion de datos
     public static void PersistenciaObtencionDatos(){
-    
+        PilaRuta pl = new PilaRuta();
         String direccion="Ruta";
         Archivos arch = new Archivos();
         Bus[] Vbus = null;
@@ -188,6 +188,9 @@ public class LaPazBus {
             Vparada = cargarParada(direccion+"\\"+Vcarpeta[i]);
             VHorario = cargarHorario(direccion+"\\"+Vcarpeta[i]);
             VTarifa = cargarTarifa(direccion+"\\"+Vcarpeta[i]);
+            Ruta r = new Ruta(Vcarpeta[i],Vbus, VHorario, Vparada, VTarifa);
+            pl.adiElem(r);
+            System.out.println("Se agrego de manera exitosa los datos en la pila");
         }
         System.out.println("----------------------");
         System.out.println("");
