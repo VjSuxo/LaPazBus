@@ -81,6 +81,20 @@ public class Archivos {
       return sw;        
     }
     
+    public int contarCarpeta(String carpeta){
+        int sw = 0; 
+        File f = new File("LaPazBus"+"\\"+carpeta);
+        File[] listFiles = f.listFiles();
+            for (File file : listFiles) {
+                String p = file.toString();
+                System.out.println(p);
+                
+                    sw +=1;                
+                            
+            }
+        return sw;
+    }
+    
     public int contarCarpeta(String carpeta,String nombre,int rango){
         
         int sw = 0;      
@@ -112,24 +126,20 @@ public class Archivos {
       return sw;   
     
     }    
+
     
-    public String[] cargarCarpeta(String carpeta,String k,String[] s){
+    
+    public String[] cargarCarpeta(String carpeta,String[] s){
         int j = 0 ;
         File f = new File("LaPazBus\\"+carpeta);
         File[] listFiles = f.listFiles();
         for (File file : listFiles) {
             
             String p = file.getName().toString();
-                String x = p.substring(0,1);
-                if(x.equals(k)){
-                   
                     s[j] =  file.getName();
                      System.out.println(s[j]);
                         j++;
-                }
-            
-            
-            
+                
         }
         return s; 
     }
@@ -153,6 +163,21 @@ public class Archivos {
         }
     }
     
+    
+    public int ContarArchivos(String carpeta){
+        int c = 0 ;
+        String s = "";
+        File f = new File("LaPazBus"+"\\"+carpeta);
+        System.out.println("Direccion que se estan contando "+f);
+        File[] listFiles = f.listFiles();
+        for (File file : listFiles) {
+            s = file.getName();
+            c++;
+        }
+        return c;
+    }
+    
+    
     public int ContarArchivos(String carpeta,String t){
         int c = 0 ;
         String s = "";
@@ -167,20 +192,33 @@ public class Archivos {
         }
         return c;
     }
-    
-    public int ContarArchivos2(String carpeta,String t){
+  
+    public int ContarArchivos2(String carpeta){
         int c = 0 ;
         String s = "";
         File f = new File("LaPazBus"+"\\"+carpeta);
-        System.out.println("Direccion que se estan contando "+f +" nombre buscado "+t);
+        System.out.println("Direccion que se estan contando "+f);
         File[] listFiles = f.listFiles();
         for (File file : listFiles) {
-        s = file.getName();
-           if((s.substring(0,3)).equals(t.substring(0,3))){
-               c++;
-           }
+            s = file.getName();
+            c++;     
         }
         return c;
+    }
+    
+    public String[] cargarArchivos(String carpeta,String[] s){
+        int j = 0 ;
+        
+        File f = new File("LaPazBus\\"+carpeta);
+        File[] listFiles = f.listFiles();
+        System.out.println(f);
+        for (File file : listFiles) {
+                    s[j] =  file.getName();
+                     System.out.println(s[j]);
+                        j++;
+                
+        }
+        return s; 
     }
     
     public int econtarArchivos(String carpeta,String t){
@@ -252,11 +290,11 @@ public class Archivos {
         }
     }
     
-    public String leerArchivos(String nom,String tipo) {
+    public String[] leerArchivos(String nom,String tipo,int cantidad) {
         
         String []arreglo=null;
-        String []ve;
-        
+        String []ve = new String[cantidad];
+        int indice = 0;
         
             String ss="";
             boolean s = false;
@@ -287,6 +325,8 @@ public class Archivos {
                         System.out.println("tamaño arreglo"+arreglo.length);
                         while(true){
                             ss = ss+arreglo[i];
+                            ve[indice] = arreglo[i];
+                            indice++;
                             i++;
                             System.out.println("i "+i);
                             if(i>=arreglo.length){
@@ -306,7 +346,7 @@ public class Archivos {
                 }
                
             }        
-        return ss;        
+        return ve;        
         
     }
     
@@ -361,7 +401,7 @@ public class Archivos {
                 }
                
             }
-        fr.delete();
+        
         return ss;        
         
     }

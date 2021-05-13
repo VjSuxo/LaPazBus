@@ -16,6 +16,10 @@ public class LaPazBus {
     /**
      * @param args the command line arguments
      */
+    
+    
+    static Archivos arch = new Archivos();
+    
     public static void main(String[] args) {
         // TODO code application logic here
         
@@ -26,6 +30,17 @@ public class LaPazBus {
         pr.adiElem(ruta1);
         aux.adiElem(ruta1);
         Manipular(aux);
+        PersistenciadatosAlmacenamiento(pr);
+        System.out.println("--------------------------");
+        System.out.println("    Obtencion de datos");
+        System.out.println("--------------------------");
+        PersistenciaObtencionDatos();
+        
+    }
+    
+    
+    public static void PersistenciadatosAlmacenamiento(PilaRuta pr){
+    
         // manipulacion almacenamiento de datos
         
         Archivos arch = new Archivos();
@@ -146,8 +161,222 @@ public class LaPazBus {
            
         }
         
+    
+    
     }
     
+    
+    // Obtencion de datos
+    public static void PersistenciaObtencionDatos(){
+    
+        String direccion="Ruta";
+        Archivos arch = new Archivos();
+        Bus[] Vbus = null;
+        Parada[] Vparada = null;
+        Horario[] VHorario = null;
+        Tarifa[] VTarifa = null;
+        //Obtencion de buses
+        int Ccarpetas = arch.contarCarpeta("Ruta");
+        System.out.println(Ccarpetas);
+        String[] Vcarpeta = new String[Ccarpetas];
+        Vcarpeta = arch.cargarCarpeta(direccion, Vcarpeta);
+        
+        System.out.println("");
+        System.out.println("------Carpetas--------");
+        for (int i = 0; i < Ccarpetas; i++) {
+            Vbus = cargarBus(direccion+"\\"+Vcarpeta[i]);
+            Vparada = cargarParada(direccion+"\\"+Vcarpeta[i]);
+            VHorario = cargarHorario(direccion+"\\"+Vcarpeta[i]);
+            VTarifa = cargarTarifa(direccion+"\\"+Vcarpeta[i]);
+        }
+        System.out.println("----------------------");
+        System.out.println("");
+        
+        
+        
+    }
+    //Obtencion de datos de bus
+    public static Bus[] cargarBus(String direccion){
+        Bus bus[] = null;
+        Asiento[] Vas = null;
+        DatosPersonal[] Vdp = null;
+        String[] data = null;
+        System.out.println("-*--*-*--*-*-*-*-*-*-*-*-*-*-*--**--*-*");
+        System.out.println("            Cargar Bus");
+            int CBus = arch.contarCarpeta(direccion+"\\Bus");
+            String[] Vbus = new String[CBus];
+                      bus = new Bus[CBus];
+            Vbus = arch.cargarCarpeta(direccion+"\\Bus",Vbus);
+            
+            for (int i = 0; i < CBus; i++) {
+            
+                Vas  = cargarAsiento(direccion+"\\Bus\\"+Vbus[i]);
+                Vdp  = cargarPersonal(direccion+"\\Bus\\"+Vbus[i]);
+                data = arch.leerArchivos(direccion+"\\Bus\\"+Vbus[i],"Data",2);
+                Bus b = new Bus(Vdp, Vas, Integer.parseInt(data[0]),Integer.parseInt(data[1]));
+                bus[i] = b;
+            }
+            
+        System.out.println("-*--*-*--*-*-*-*-*-*-*-*-*-*-*--**--*-*");    
+          
+        return bus;
+    }
+    
+    public static Asiento[] cargarAsiento(String direccion){
+        
+        
+        System.out.println("|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-");
+        System.out.println("            Cargar Asiento");
+            int CAsiento = arch.ContarArchivos2(direccion+"\\Asiento");
+            Asiento[] as = new Asiento[CAsiento];
+            String[] Vas = new String[CAsiento];
+            String[] data = new String[3];
+            Vas = arch.cargarArchivos(direccion+"\\Asiento", Vas);
+            
+            
+            for (int i = 0; i < CAsiento; i++) {
+                data = arch.leerArchivos(direccion+"\\Asiento",Vas[i],3);
+                boolean sw1 = false;
+                boolean sw2 = false;
+                if (data[1].equals("true")) {
+                    sw1 = true;
+                }
+                if(data[2].equals("true")){
+                    sw2 = true;
+                }
+                Asiento dt = new Asiento(sw1,data[0],sw2);
+                as[i] = dt;
+            }
+        System.out.println("|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-");
+        return as;
+    
+    }
+    
+    public static DatosPersonal[] cargarPersonal(String direccion){
+        
+        
+        System.out.println("|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-");
+        System.out.println("            Cargar Personal Bus");
+            int CDpersonal = arch.ContarArchivos2(direccion+"\\Personal");
+            DatosPersonal[] dp = new DatosPersonal[CDpersonal];
+            String[] Vdp = new String[CDpersonal];
+            String[] data = new String[4];
+            data = arch.cargarArchivos(direccion+"\\Personal", Vdp);
+            
+            
+            for (int i = 0; i < CDpersonal; i++) {
+                data = arch.leerArchivos(direccion+"\\Personal",Vdp[i],5);
+               
+                DatosPersonal dt = new DatosPersonal(data[1],data[0],data[3],Integer.parseInt(data[2]));
+                dp[i] = dt;
+            }
+        System.out.println("|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-");
+        return dp;
+    
+    }
+    // fin de obtencion datos bus
+   
+    //obtencion de Parada
+    public static Parada[] cargarParada(String direccion){
+        int indice = 0;
+        Parada[] P = null;
+            System.out.println("**************************************");
+            System.out.println("              cargar Parada");
+            int Cparadas = arch.contarCarpeta(direccion+"\\Parada");
+            String[] VParada = new String[Cparadas];
+            String[] Vcalle  = null; 
+                     VParada = arch.cargarCarpeta(direccion+"\\Parada", VParada);
+            int CCalles = 0;
+            for (int i = 0; i < Cparadas; i++) {
+                CCalles += arch.ContarArchivos(direccion+"\\Parada\\"+VParada[i]);
+                  
+            }
+            
+            P = new Parada[CCalles];
+            
+            for (int i = 0; i < Cparadas; i++) {
+            
+                CCalles = arch.ContarArchivos(direccion+"\\Parada\\"+VParada[i]);
+                    
+                    Vcalle  = new String[CCalles];
+                    Vcalle  = arch.cargarArchivos(direccion+"\\Parada\\"+VParada[i], Vcalle);
+                    for (int j = 0; j < CCalles; j++) {
+                    
+                        Parada pa = new Parada(VParada[i],Vcalle[j]);    
+                        P[indice] = pa;
+                        indice++;
+                    
+                    }
+                    
+            }
+            System.out.println("**************************************");
+        return P;
+    }
+    //fin de obtencion de Parada
+    
+    //obtencion de horario
+    public static Horario[] cargarHorario(String direccion){
+        Horario[] H = null;
+        int CHorario = arch.ContarArchivos(direccion+"\\Horario");
+        System.out.println(CHorario);
+            H = new Horario[CHorario];
+        String[] Vh = new String[CHorario];
+            Vh = arch.cargarArchivos(direccion+"\\Horario", Vh);
+        String[] data = new String[1];
+        String[] data2 = new String[1];
+            for (int i = 0; i < CHorario-1; i+=2) {
+                data = arch.leerArchivos(direccion+"\\Horario",Vh[i],1);
+                data2 = arch.leerArchivos(direccion+"\\Horario",Vh[i+1],1);
+                Horario h = new Horario(data[0],data2[0],0);
+            }
+        return H;
+    }
+    //fin obtencion de horario
+    
+    //obtener tarifa
+    public static Tarifa[] cargarTarifa(String direccion){
+        Tarifa[] T = null;
+        int indice = 0;
+        int j = 0;
+        int CTarifa = arch.contarCarpeta(direccion+"\\Tarifa");
+                 T = new Tarifa[CTarifa*2];
+        String[] Vt = new String[CTarifa];
+        String[] dataPago = new String[CTarifa];
+        String[] dataTurnoD = new String[1];
+        String[] dataTurnoN = new String[1];
+                 dataPago = arch.cargarCarpeta(direccion+"\\Tarifa", dataPago);
+                
+        
+        for (int i = 0; i < 8; i+=2) {
+            
+            if(j==4){
+                break;
+            }
+                dataTurnoD = arch.leerArchivos(direccion+"\\Tarifa\\"+dataPago[j],"Diurno", 1);
+            
+                dataTurnoN = arch.leerArchivos(direccion+"\\Tarifa\\"+dataPago[j],"Nocturno", 1);
+                
+                
+                double x = Double.parseDouble(dataTurnoD[0]);
+                System.out.println(x);
+                Tarifa dt = new Tarifa(dataPago[j],"Diurno",x);
+                T[i] = dt;
+            
+                   x = Double.parseDouble(dataTurnoN[0]);
+                   dt = new Tarifa(dataPago[j],"Nocturno",x);
+                T[i+1] = dt;
+            
+            j++;
+            
+        }
+        
+        for (int i = 0; i < CTarifa*2; i++) {
+            
+            System.out.println(T[i].getTipoPago());
+        }
+        return T;
+    }
+    //fin obtencion tarifa
     
     public static Ruta Creacion(){
         
