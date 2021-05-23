@@ -37,7 +37,7 @@ public class Personal extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(208, 300));
+        setMinimumSize(new java.awt.Dimension(261, 349));
         getContentPane().setLayout(null);
 
         jButton1.setText("CREAR RUTA");
@@ -47,27 +47,27 @@ public class Personal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(20, 30, 160, 32);
+        jButton1.setBounds(20, 10, 160, 32);
 
         jButton2.setText("BUS");
         getContentPane().add(jButton2);
-        jButton2.setBounds(20, 80, 160, 32);
+        jButton2.setBounds(20, 60, 160, 32);
 
         jButton3.setText("SOLICITUDES");
         getContentPane().add(jButton3);
-        jButton3.setBounds(20, 130, 160, 32);
+        jButton3.setBounds(20, 110, 160, 32);
 
         jButton4.setText("BUSCAR EMPLEADO");
         getContentPane().add(jButton4);
-        jButton4.setBounds(20, 180, 160, 32);
+        jButton4.setBounds(20, 160, 160, 32);
 
         jButton5.setText("ELIMINAR EMPLEADO");
         getContentPane().add(jButton5);
-        jButton5.setBounds(20, 230, 160, 32);
+        jButton5.setBounds(20, 210, 160, 32);
 
         jButton6.setText("MENU");
         getContentPane().add(jButton6);
-        jButton6.setBounds(110, 270, 90, 32);
+        jButton6.setBounds(110, 250, 90, 32);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -77,6 +77,8 @@ public class Personal extends javax.swing.JFrame {
         CRuta cr = new CRuta();
         String x = JOptionPane.showInputDialog("Nombre de la Ruta");
         cr.setRuta(x);
+        cr.show();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

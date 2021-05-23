@@ -6,6 +6,7 @@
 package EntGrafico;
 
 import Codigo.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +20,8 @@ public class CBus extends javax.swing.JFrame {
     
     metodos met= new metodos();
     Asiento[] as ;
-    DatosPersonal[] dpv;
+    DatosPersonal[] dpv = new DatosPersonal[100];
+    Archivos arch = new Archivos();
     int i =0;
     private String Ruta;
     public CBus() {
@@ -32,6 +34,17 @@ public class CBus extends javax.swing.JFrame {
 
     public void setRuta(String Ruta) {
         this.Ruta = Ruta;
+        String placa = JOptionPane.showInputDialog("Ingrese numero de placa");
+        String año   = JOptionPane.showInputDialog("Ingrese Año de creacion");
+        System.out.println("---"+Ruta);
+        arch.crearCarpeta("Ruta\\"+Ruta,placa);
+        Ruta+="\\"+placa;
+        System.out.println("++++"+Ruta);
+        arch.crearArchivos("Ruta\\"+Ruta, placa,año);
+        arch.crearCarpeta("Ruta\\"+Ruta,"Asiento");
+        arch.crearCarpeta("Ruta\\"+Ruta,"Personal");
+        
+        
     }
     
 
@@ -45,6 +58,8 @@ public class CBus extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton3 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -59,13 +74,15 @@ public class CBus extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
 
         jButton3.setText("jButton3");
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(686, 329));
+        setMinimumSize(new java.awt.Dimension(538, 398));
         getContentPane().setLayout(null);
 
         jButton1.setText("GENERAR ASIENTOS");
@@ -135,22 +152,6 @@ public class CBus extends javax.swing.JFrame {
         getContentPane().add(jSeparator3);
         jSeparator3.setBounds(190, 0, 20, 250);
 
-        Table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        jScrollPane1.setViewportView(Table);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(470, 0, 220, 330);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -163,15 +164,15 @@ public class CBus extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        DatosPersonal dp = new DatosPersonal(JNombre.getText(), JCi.getText(), JCargo.getText(), Integer.parseInt(JEdad.getText()));
+        dpv[i] = dp;
         
+        i++;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void JCiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCiActionPerformed
         // TODO add your handling code here:
-        DatosPersonal dp = new DatosPersonal(JNombre.getText(), JCi.getText(), JCargo.getText(), Integer.parseInt(JEdad.getText()));
-        dpv[i] = dp;
-        Table.add(JNombre.getText(), this);
-        i++;
+        
     }//GEN-LAST:event_JCiActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -187,7 +188,7 @@ public class CBus extends javax.swing.JFrame {
         for (int j = 0; j < as.length; j++) {
                 Asiento a = as[j];
                 String data =  a.getTipo()+"\n"+a.isEstado()+"\n"+a.isSeccion();
-                arch.crearArchivos(Ruta+"\\Asiento",j+a.getTipo(), data);
+                arch.crearArchivos("Ruta\\"+Ruta+"\\Bus\\Asiento",j+a.getTipo(), data);
                 
             }
             
@@ -234,7 +235,6 @@ public class CBus extends javax.swing.JFrame {
     private javax.swing.JTextField JCi;
     private javax.swing.JTextField JEdad;
     private javax.swing.JTextField JNombre;
-    private javax.swing.JTable Table;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -243,9 +243,10 @@ public class CBus extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

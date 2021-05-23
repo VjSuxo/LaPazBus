@@ -33,6 +33,7 @@ public class Inicio extends javax.swing.JFrame {
         USR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(193, 297));
         getContentPane().setLayout(null);
 
         PRS.setText("ENTRAR");
@@ -42,21 +43,26 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(PRS);
-        PRS.setBounds(110, 240, 90, 40);
+        PRS.setBounds(40, 200, 90, 40);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("PERSONAL");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(110, 190, 130, 50);
+        jLabel1.setBounds(40, 150, 130, 50);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("USUARIO");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(110, 70, 130, 50);
+        jLabel2.setBounds(50, 30, 130, 50);
 
         USR.setText("ENTRAR");
+        USR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                USRActionPerformed(evt);
+            }
+        });
         getContentPane().add(USR);
-        USR.setBounds(107, 112, 90, 40);
+        USR.setBounds(40, 70, 90, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -67,6 +73,10 @@ public class Inicio extends javax.swing.JFrame {
         pr.show();
         this.dispose();
     }//GEN-LAST:event_PRSActionPerformed
+
+    private void USRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_USRActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_USRActionPerformed
 
     /**
      * @param args the command line arguments
