@@ -22,8 +22,10 @@ public class CBus extends javax.swing.JFrame {
     Asiento[] as ;
     DatosPersonal[] dpv = new DatosPersonal[100];
     Archivos arch = new Archivos();
+    String placa;
     int i =0;
     private String Ruta;
+    private String RRuta;
     public CBus() {
         initComponents();
     }
@@ -34,13 +36,16 @@ public class CBus extends javax.swing.JFrame {
 
     public void setRuta(String Ruta) {
         this.Ruta = Ruta;
-        String placa = JOptionPane.showInputDialog("Ingrese numero de placa");
+        this.RRuta = Ruta;
+        placa = JOptionPane.showInputDialog("Ingrese numero de placa");
         String año   = JOptionPane.showInputDialog("Ingrese Año de creacion");
         System.out.println("---"+Ruta);
-        arch.crearCarpeta("Ruta\\"+Ruta,placa);
-        Ruta+="\\"+placa;
+        arch.crearCarpeta("Ruta\\"+Ruta+"\\Bus",placa);
+        Ruta+="\\Bus\\"+placa;
         System.out.println("++++"+Ruta);
-        arch.crearArchivos("Ruta\\"+Ruta, placa,año);
+        System.out.println("Creando archivod");
+        arch.crearArchivos("Ruta\\"+Ruta, "Data",placa+"\n"+año);
+        System.out.println("------------------");
         arch.crearCarpeta("Ruta\\"+Ruta,"Asiento");
         arch.crearCarpeta("Ruta\\"+Ruta,"Personal");
         
@@ -165,6 +170,10 @@ public class CBus extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         DatosPersonal dp = new DatosPersonal(JNombre.getText(), JCi.getText(), JCargo.getText(), Integer.parseInt(JEdad.getText()));
+        JNombre.setText(""); 
+        JCi.setText(""); 
+        JCargo.setText("");
+        JEdad.setText("");
         dpv[i] = dp;
         
         i++;
@@ -178,19 +187,28 @@ public class CBus extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
-        DatosPersonal[] vv = new DatosPersonal[i];
-        
+  
+        System.out.println("--- Generarndo Personal ----");
         for (int j = 0; j < i; j++) {
-            vv[j]=dpv[j];
+            String x = dpv[j].getCi()+"\\"+dpv[j].getNombre()+"\\"+dpv[j].getCargo();
+            arch.crearArchivos("Ruta\\"+Ruta+"\\Bus\\"+placa+"\\Asiento",dpv[j].getCi(),x);
+            
         }
-        
+        System.out.println("--------------------------------");
+        System.out.println("----- Generando Asintos ---------");
         Archivos arch = new Archivos();
         for (int j = 0; j < as.length; j++) {
                 Asiento a = as[j];
                 String data =  a.getTipo()+"\n"+a.isEstado()+"\n"+a.isSeccion();
-                arch.crearArchivos("Ruta\\"+Ruta+"\\Bus\\Asiento",j+a.getTipo(), data);
+                arch.crearArchivos("Ruta\\"+Ruta+"\\Bus\\"+placa+"\\Asiento",j+a.getTipo(), data);
                 
             }
+        System.out.println("-----------------------------------");
+        
+        CRuta c = new CRuta();
+        c.setRuta(RRuta);
+        c.show();
+        this.dispose();
             
         
     }//GEN-LAST:event_jButton4ActionPerformed

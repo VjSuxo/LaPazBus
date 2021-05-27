@@ -124,6 +124,11 @@ public class CRuta extends javax.swing.JFrame {
         jButton1.setBounds(30, 40, 180, 32);
 
         jButton2.setText("CREAR PARADA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
         jButton2.setBounds(30, 80, 180, 32);
 
@@ -137,7 +142,7 @@ public class CRuta extends javax.swing.JFrame {
 
         jButton5.setText("FINALIZAR");
         getContentPane().add(jButton5);
-        jButton5.setBounds(140, 230, 90, 32);
+        jButton5.setBounds(120, 230, 110, 32);
 
         LbRuta.setText("Nombre RUta");
         getContentPane().add(LbRuta);
@@ -153,6 +158,10 @@ public class CRuta extends javax.swing.JFrame {
         b.show();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,6 +6,7 @@
 package lapazbus;
 
 import Codigo.*;
+import EntGrafico.Inicio;
 
 /**
  *
@@ -22,17 +23,20 @@ public class LaPazBus {
     
     public static void main(String[] args) {
         // TODO code application logic here
-        
+ 
         PilaRuta pr = new PilaRuta();
         PilaRuta aux = new PilaRuta();
         Ruta ruta1 = Creacion();
 
+//        Inicio in = new Inicio();
+//        in.show();
+        
         pr.adiElem(ruta1);
         aux.adiElem(ruta1);
         Manipular(aux);
         PersistenciadatosAlmacenamiento(pr);
         System.out.println("--------------------------");
-        System.out.println("    Obtencion de datos");
+       System.out.println("    Obtencion de datos");
         System.out.println("--------------------------");
         PersistenciaObtencionDatos();
         
