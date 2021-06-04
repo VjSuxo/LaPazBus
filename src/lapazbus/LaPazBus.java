@@ -28,8 +28,8 @@ public class LaPazBus {
         PilaRuta aux = new PilaRuta();
         Ruta ruta1 = Creacion();
 
-//        Inicio in = new Inicio();
-//        in.show();
+        Inicio in = new Inicio();
+       in.show();
         
         pr.adiElem(ruta1);
         aux.adiElem(ruta1);
@@ -178,7 +178,7 @@ public class LaPazBus {
         Bus[] Vbus = null;
         Parada[] Vparada = null;
         Horario[] VHorario = null;
-        Tarifa[] VTarifa = null;
+        Tarifa[] VTarifa =  null;
         //Obtencion de buses
         int Ccarpetas = arch.contarCarpeta("Ruta");
         System.out.println(Ccarpetas);
@@ -353,7 +353,7 @@ public class LaPazBus {
         String[] dataTurnoN = new String[1];
                  dataPago = arch.cargarCarpeta(direccion+"\\Tarifa", dataPago);
                 
-        
+                 System.out.println(direccion+"-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/");
         for (int i = 0; i < 8; i+=2) {
             
             if(j==4){
