@@ -44,6 +44,11 @@ public class Horario {
         this.Salida = Salida;
     }
     
+    public String mostrar(){
+    
+        return "Llegada : "+Llegada+" Salida :"+Salida;
+        
+    }
     
     
 }

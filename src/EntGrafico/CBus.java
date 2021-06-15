@@ -18,40 +18,23 @@ public class CBus extends javax.swing.JFrame {
      * Creates new form CBus
      */
     
-    metodos met= new metodos();
-    Asiento[] as ;
-    DatosPersonal[] dpv = new DatosPersonal[100];
-    Archivos arch = new Archivos();
-    String placa;
-    int i =0;
-    private String Ruta;
-    private String RRuta;
     public CBus() {
         initComponents();
     }
 
-    public String getRuta() {
-        return Ruta;
-    }
-
-    public void setRuta(String Ruta) {
-        this.Ruta = Ruta;
-        this.RRuta = Ruta;
-        placa = JOptionPane.showInputDialog("Ingrese numero de placa");
-        String año   = JOptionPane.showInputDialog("Ingrese Año de creacion");
-        System.out.println("---"+Ruta);
-        arch.crearCarpeta("Ruta\\"+Ruta+"\\Bus",placa);
-        Ruta+="\\Bus\\"+placa;
-        System.out.println("++++"+Ruta);
-        System.out.println("Creando archivod");
-        arch.crearArchivos("Ruta\\"+Ruta, "Data",placa+"\n"+año);
-        System.out.println("------------------");
-        arch.crearCarpeta("Ruta\\"+Ruta,"Asiento");
-        arch.crearCarpeta("Ruta\\"+Ruta,"Personal");
-        
-        
-    }
+    PilaPersonal pilaPersonal = new PilaPersonal();
+    PilaAsiento pilaAsiento = new PilaAsiento();
+    PilaBus pilaBus = new PilaBus();
     
+    Ruta ruta;
+    
+    String codigo;
+    String añoEmpleo;
+    public void Base(Ruta ruta){
+        this.ruta = ruta;
+        this.codigo = JOptionPane.showInputDialog("Ingrese codigo del bus");
+        this.añoEmpleo = JOptionPane.showInputDialog("Ingrese año de empleo");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,12 +56,14 @@ public class CBus extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         JCi = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        JCargo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         JEdad = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        hora = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        cargo = new javax.swing.JComboBox<>();
 
         jButton3.setText("jButton3");
 
@@ -115,7 +100,7 @@ public class CBus extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(180, 280, 100, 30);
+        jButton4.setBounds(340, 280, 100, 30);
 
         jLabel1.setText("Nombre :");
         getContentPane().add(jLabel1);
@@ -138,12 +123,10 @@ public class CBus extends javax.swing.JFrame {
         jLabel3.setText("Cargo :");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(210, 90, 60, 50);
-        getContentPane().add(JCargo);
-        JCargo.setBounds(270, 100, 180, 24);
 
-        jLabel4.setText("Edad :");
+        jLabel4.setText("Hora :");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(210, 130, 60, 40);
+        jLabel4.setBounds(0, 250, 40, 40);
         getContentPane().add(JEdad);
         JEdad.setBounds(270, 140, 180, 24);
         getContentPane().add(jSeparator1);
@@ -157,26 +140,49 @@ public class CBus extends javax.swing.JFrame {
         getContentPane().add(jSeparator3);
         jSeparator3.setBounds(190, 0, 20, 250);
 
+        hora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                horaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(hora);
+        hora.setBounds(40, 260, 80, 24);
+
+        jLabel5.setText("Edad :");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(210, 130, 60, 40);
+
+        cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "conductor", "anfitrion" }));
+        getContentPane().add(cargo);
+        cargo.setBounds(270, 100, 180, 26);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.as  = met.generarAsientos();
+        
+        for (int i = 0; i < 15; i++) {
+            Asiento a = new Asiento("libre", "normal",true);
+            pilaAsiento.adiElem(a);
+        }
+        for (int i = 0; i < 10; i++) {
+            Asiento a = new Asiento("libre", "preferencial",true);
+            pilaAsiento.adiElem(a);
+        }
+        
         System.out.println("Se genero");
            
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        DatosPersonal dp = new DatosPersonal(JNombre.getText(), JCi.getText(), JCargo.getText(), Integer.parseInt(JEdad.getText()));
+        DatosPersonal dp = new DatosPersonal(JNombre.getText(), JCi.getText(), (String)cargo.getSelectedItem(), Integer.parseInt(JEdad.getText()));
+        pilaPersonal.adiElem(dp);
+        
         JNombre.setText(""); 
         JCi.setText(""); 
-        JCargo.setText("");
         JEdad.setText("");
-        dpv[i] = dp;
-        
-        i++;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void JCiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCiActionPerformed
@@ -187,31 +193,21 @@ public class CBus extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
-  
-        System.out.println("--- Generarndo Personal ----");
-        for (int j = 0; j < i; j++) {
-            String x = dpv[j].getCi()+"\\"+dpv[j].getNombre()+"\\"+dpv[j].getCargo();
-            arch.crearArchivos("Ruta\\"+Ruta+"\\Bus\\"+placa+"\\Asiento",dpv[j].getCi(),x);
-            
-        }
-        System.out.println("--------------------------------");
-        System.out.println("----- Generando Asintos ---------");
-        Archivos arch = new Archivos();
-        for (int j = 0; j < as.length; j++) {
-                Asiento a = as[j];
-                String data =  a.getTipo()+"\n"+a.isEstado()+"\n"+a.isSeccion();
-                arch.crearArchivos("Ruta\\"+Ruta+"\\Bus\\"+placa+"\\Asiento",j+a.getTipo(), data);
-                
-            }
-        System.out.println("-----------------------------------");
+        Bus b = new Bus(pilaPersonal, pilaAsiento,Integer.parseInt(codigo),Integer.parseInt(añoEmpleo),Integer.parseInt(hora.getText()));
+        pilaBus.adiElem(b);
+        ruta.setBuses(pilaBus);
         
         CRuta c = new CRuta();
-        c.setRuta(RRuta);
+        c.setRuta(ruta);
         c.show();
         this.dispose();
             
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_horaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,10 +245,11 @@ public class CBus extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField JCargo;
     private javax.swing.JTextField JCi;
     private javax.swing.JTextField JEdad;
     private javax.swing.JTextField JNombre;
+    private javax.swing.JComboBox<String> cargo;
+    private javax.swing.JTextField hora;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -261,6 +258,7 @@ public class CBus extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

@@ -13,22 +13,22 @@ package Codigo;
  * @param Seccion= (True)Delantera  (False)trasera
  */
 public class Asiento {
-    private boolean Estado;
+    private String Estado;
     private String  Tipo;
     private boolean Seccion;
 
-    public Asiento(boolean Estado, String Tipo, boolean Seccion) {
+    public Asiento(String Estado, String Tipo, boolean Seccion) {
         
         this.Estado = Estado;
         this.Tipo = Tipo;
         this.Seccion = Seccion;
     }
 
-    public boolean isEstado() {
+    public String isEstado() {
         return Estado;
     }
 
-    public void setEstado(boolean Estado) {
+    public void setEstado(String Estado) {
         this.Estado = Estado;
     }
 
@@ -48,6 +48,11 @@ public class Asiento {
         this.Seccion = Seccion;
     }
  
+    public String mostrar(){
+    
+        return "Estado : "+Estado+" Tipo : "+Tipo+" Seccion : "+Seccion;
+        
+    }
     
     
 }

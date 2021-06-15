@@ -64,7 +64,28 @@ public class PilaRuta {
        int n = tope;
        for(int i=0; i<=n-1;i++){
            Ruta data =eliminar();
+           System.out.println("-----------------------------");
            System.out.println(data.getNombreRuta());
+           System.out.println("");
+           System.out.println("---------------------------Bus");
+           data.getBuses().mostrar();
+           System.out.println("");
+           System.out.println("-------------------------Bus Asiento");
+           Bus b = data.getBuses().eliminar();
+           b.getAsiento().mostrar();
+           System.out.println("");
+           System.out.println("------------------------Bus Personal");
+           b.getDp().mostrar();
+           System.out.println("");
+           System.out.println("-----------------------Horario");
+           data.getH().mostrar();
+           System.out.println("");
+           System.out.println("---------------------Parada");
+           data.getP().mostrar();
+           System.out.println("");
+           System.out.println("---------------------Tarifa");
+           data.getT().mostrar();
+           System.out.println("-------------------------------");
            aux.adiElem(data);
        }
        this.vaciar(aux);

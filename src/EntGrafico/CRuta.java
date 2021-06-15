@@ -22,74 +22,37 @@ public class CRuta extends javax.swing.JFrame {
        
         initComponents();
     }
+    private PilaRuta pilaRuta = new PilaRuta();
+    private Ruta ruta;   
+    private Bus bus;
+    private PilaBus Buses;
+    private PilaParada Pa;
+    private PilaHorario Ho;
+    private PilaTarifa Ta;
+
+    public Ruta getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
+    }
     
-    private String Ruta;
-    private Ruta R;
-    private Bus[] Buses;
-    private Parada[] Pa;
-    private Horario[] Ho;
-    private Tarifa[] Ta;
+    private String nruta;
+
+    public String getNruta() {
+        return nruta;
+    }
+
+    public void setNruta(String nruta) {
+        this.nruta = nruta;
+    }
     
-    public String getRuta() {
-        return Ruta;
-    }
-
-    public void setRuta(String Ruta) {
-        LbRuta.setText(Ruta);
-        this.Ruta = Ruta;
-         arch.crearCarpeta("Ruta",Ruta);
-        arch.crearCarpeta("Ruta\\"+Ruta,"Bus");
-        arch.crearCarpeta("Ruta\\"+Ruta,"Parada");
-        arch.crearCarpeta("Ruta\\"+Ruta,"Horario");
-        arch.crearCarpeta("Ruta\\"+Ruta,"Tarifa");
-    }
-
-    public Ruta getR() {
-        return R;
-    }
-
-    public void setR(Ruta R) {
-        this.R = R;
-    }
-
-    public Bus[] getBuses() {
-        return Buses;
-    }
-
-    public void setBuses(Bus[] Buses) {
-        this.Buses = Buses;
-    }
-
-    public Horario[] getHo() {
-        return Ho;
-    }
-
-    public void setHo(Horario[] Ho) {
-        this.Ho = Ho;
-    }
-
-    public Tarifa[] getTa() {
-        return Ta;
-    }
-
-    public void setTa(Tarifa[] Ta) {
-        this.Ta = Ta;
-    }
-
-    public JLabel getLbRuta() {
-        return LbRuta;
-    }
-
-    public void setLbRuta(JLabel LbRuta) {
-        this.LbRuta = LbRuta;
-    }
-
-    public Parada[] getPa() {
-        return Pa;
-    }
-
-    public void setPa(Parada[] Pa) {
-        this.Pa = Pa;
+    public void Base(String x,PilaRuta pilaRuta){
+    
+        this.pilaRuta = pilaRuta;
+        LbRuta.setText(x);
+    
     }
     
     
@@ -109,6 +72,7 @@ public class CRuta extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         LbRuta = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(295, 340));
@@ -133,14 +97,29 @@ public class CRuta extends javax.swing.JFrame {
         jButton2.setBounds(30, 80, 180, 32);
 
         jButton3.setText("GENERAR HORARIO");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(30, 130, 180, 32);
 
         jButton4.setText("GENERAR TARIFA");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4);
         jButton4.setBounds(30, 180, 180, 32);
 
         jButton5.setText("FINALIZAR");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton5);
         jButton5.setBounds(120, 230, 110, 32);
 
@@ -148,20 +127,64 @@ public class CRuta extends javax.swing.JFrame {
         getContentPane().add(LbRuta);
         LbRuta.setBounds(10, 0, 230, 40);
 
+        jButton6.setText("MOSTRAR");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6);
+        jButton6.setBounds(7, 230, 100, 32);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         CBus b = new CBus();
-        b.setRuta(Ruta);
+        b.Base(ruta);
         b.show();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        CParada cp = new CParada();
+        cp.base(ruta);
+        cp.show();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        CHorario ch = new CHorario();
+        ch.base(ruta);
+        ch.show();
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        CTarifa ct = new CTarifa();
+        ct.base(ruta);
+        ct.show();
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        ruta.mostrar();
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        Personal p = new Personal();
+        pilaRuta.adiElem(ruta);
+        p.setRuta(pilaRuta);
+        p.show();
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,5 +228,6 @@ public class CRuta extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     // End of variables declaration//GEN-END:variables
 }

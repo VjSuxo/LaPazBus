@@ -12,41 +12,20 @@ package Codigo;
 public class Ruta {
     
     private String NombreRuta;
-    private Bus[] Buses;
-    private int Bindice=0,Bcant=0;
-    private Horario[] H;
-    private int Hindice=0,Hcant=0;
-    private Parada P[];
-    private int Pindice=0,Pcant=0;
-    private Tarifa[] T;
-    private int Tindice=0,Tcant=0;
-    public Ruta(String NombreRuta, Bus[] Buses, Horario[] H, Parada P[],Tarifa[] t) {
-        
+    private PilaBus Buses;
+    private PilaHorario H;
+    private PilaParada P;
+    private PilaTarifa T;
+
+    public Ruta() {
+    }
+
+    public Ruta(String NombreRuta, PilaBus Buses, PilaHorario H, PilaParada P, PilaTarifa T) {
         this.NombreRuta = NombreRuta;
-        
-        this.Bcant = Buses.length;
-        this.Buses = new Bus[Bcant];
-        for (int i = 0; i < this.Bcant; i++) {
-            this.Buses[i] = Buses[i];
-        }
-        
-        this.Hcant = H.length;
-        this.H = new Horario[Hcant];
-        for (int i = 0; i < Hcant; i++) {
-            this.H[i] = H[i];
-        }
-        
-        this.Pcant = P.length;
-        this.P = new Parada[Pcant];
-        for (int i = 0; i < Pcant; i++) {
-            this.P[i] = P[i];
-        }
-        
-        this.Tcant = t.length;
-        this.T = new Tarifa[Tcant];
-        for (int i = 0; i < Tcant; i++) {
-            this.T[i]=t[i];
-        }
+        this.Buses = Buses;
+        this.H = H;
+        this.P = P;
+        this.T = T;
     }
 
     public String getNombreRuta() {
@@ -57,119 +36,72 @@ public class Ruta {
         this.NombreRuta = NombreRuta;
     }
 
-    public Bus getBuses() {         
+    public PilaBus getBuses() {
+        return Buses;
+    }
+
+    public void setBuses(PilaBus Buses) {
+        this.Buses = Buses;
+    }
+
+    public PilaHorario getH() {
+        return H;
+    }
+
+    public void setH(PilaHorario H) {
+        this.H = H;
+    }
+
+    public PilaParada getP() {
+        return P;
+    }
+
+    public void setP(PilaParada P) {
+        this.P = P;
+    }
+
+    public PilaTarifa getT() {
+        return T;
+    }
+
+    public void setT(PilaTarifa T) {
+        this.T = T;
+    }
+
+     public void mostrar(){
+       System.out.println("Mostrando Pila");
+     
+      
+      
+           
+           System.out.println("-----------------------------");
+           System.out.println(getNombreRuta());
+           System.out.println("");
+           System.out.println("---------------------------Bus");
+           getBuses().mostrar();
+           System.out.println("");
+           System.out.println("-----------------------Horario");
+           getH().mostrar();
+           System.out.println("");
+           System.out.println("---------------------Parada");
+           getP().mostrar();
+           System.out.println("");
+           System.out.println("---------------------Tarifa");
+           getT().mostrar();
+           System.out.println("-------------------------------");
         
-        Bus data = Buses[Bindice];
-        if (Bindice<=Bcant){
-            data = Buses[Bindice];
-            Bindice++;
-        }
-        else{
-            data = Buses[Bindice];
-            Bindice++;
-        }
-        return data;
-    }
-
-    public void setBuses(Bus buses) {
-        this.Buses[Bcant] = buses;
-        Bcant++;
-    }
-
-    public Horario getH() {
-        Horario data = null;
-        
-        if (Hindice<Hcant){
-            data = H[Hindice];
-            Hindice++;
-        }
-        else{
-            Hindice = 0;
-            data = H[Hindice];
-            Hindice++;
-        }
-        
-        return data;
-    }
-
-    public void setH(Horario h) {
-        this.H[Hcant] = h;
-        Hcant++;
-    }
-
-    public Parada getP() {
-        Parada data = null;
-        
-        if (Pindice<Pcant){
-            data = P[Pindice];
-            Pindice++;
-        }
-        else{
-            Pindice = 0;
-            data = P[Pindice];
-            Pindice++;
-        }
-        
-        return data;
-    }
-
-    public void setP(Parada p) {
-        this.P[Pcant] = p;
-        Pcant++;
-    }
-
-    public Tarifa getT() {
-        Tarifa data = null;
-        
-        if (Tindice<Tcant){
-            data = T[Tindice];
-            Tindice++;
-        }
-        else{
-            Tindice = 0;
-            data = T[Tindice];
-            Tindice++;
-        }
-        return data;
-    }
-
-    public void setT(Tarifa t) {
-        this.T[Pcant] = t;
-        Tcant++;
-    }
-
-    public int getBcant() {
-        return Bcant;
-    }
-
-    public void setBcant(int Bcant) {
-        this.Bcant = Bcant;
-    }
-
-    public int getHcant() {
-        return Hcant;
-    }
-
-    public void setHcant(int Hcant) {
-        this.Hcant = Hcant;
-    }
-
-    public int getPcant() {
-        return Pcant;
-    }
-
-    public void setPcant(int Pcant) {
-        this.Pcant = Pcant;
-    }
-
-    public int getTcant() {
-        return Tcant;
-    }
-
-    public void setTcant(int Tcant) {
-        this.Tcant = Tcant;
-    }
-        
+       }
+   
+   }
     
     
-}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+

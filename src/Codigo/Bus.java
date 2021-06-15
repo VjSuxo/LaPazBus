@@ -11,108 +11,63 @@ package Codigo;
  */
 public class Bus {
     
-    private DatosPersonal[] Dp;
-    private int DPcant=0,DPindice=0;
-    private Asiento[] Asiento;
-    private int Acant=0,Aindice=0;
+    private PilaPersonal Dp;
+    private PilaAsiento Asiento;
     private int Codigo;
     private int AñoEmpleo;
-    
-    
-    public Bus(DatosPersonal[] Dp, Asiento[] Asiento, int Codigo, int AñoEmpleo) {
+    private int Hora;
+    public Bus(PilaPersonal Dp, PilaAsiento Asiento, int Codigo, int AñoEmpleo,int hora) {
         this.Dp = Dp;
+        this.Asiento = Asiento;
         this.Codigo = Codigo;
         this.AñoEmpleo = AñoEmpleo;
-        
-        this.Acant = Asiento.length; 
-        this.Asiento = new Asiento[Acant];
-        for (int i = 0; i < Acant; i++) {
-            this.Asiento[i] = Asiento[i];
-        }
-        
-        this.DPcant = Dp.length;
-        this.Dp = new DatosPersonal[DPcant];
-        for (int i = 0; i < DPcant; i++) {
-            DatosPersonal d = Dp[i];
-            this.Dp[i]=Dp[i];
-        }
+        this.Hora = hora;
     }
 
-    public DatosPersonal getDp() {
-        DatosPersonal data = null;
-        if (DPindice<DPcant){
-            data = Dp[DPindice];
-            DPindice++;
-        }
-        else{
-            System.out.println(DPindice);
-            DPindice = 0;
-            data = null;
-        }
-        
-        return data;
+    public int getHora() {
+        return Hora;
     }
 
-    public Asiento getAsiento() {
-        
-        Asiento data = null;
-        if (Aindice<Acant){
-            data = Asiento[Aindice];
-            Aindice++;
-        }
-        else{
-            Aindice = 0;
-            data = null;
-        }
-        return data;
+    public void setHora(int Hora) {
+        this.Hora = Hora;
+    }
+
+    public PilaPersonal getDp() {
+        return Dp;
+    }
+
+    public void setDp(PilaPersonal Dp) {
+        this.Dp = Dp;
+    }
+
+    public PilaAsiento getAsiento() {
+        return Asiento;
+    }
+
+    public void setAsiento(PilaAsiento Asiento) {
+        this.Asiento = Asiento;
     }
 
     public int getCodigo() {
         return Codigo;
     }
 
+    public void setCodigo(int Codigo) {
+        this.Codigo = Codigo;
+    }
+
     public int getAñoEmpleo() {
         return AñoEmpleo;
-    }
-
-    public void setDp(DatosPersonal data) {
-        this.Dp[DPcant] = data;
-        DPcant++;
-    }
-
-    public void setAsiento(Asiento A) {
-        this.Asiento[Acant] = A;
-        Acant++;
-    }
-
-    public void setCodigo(int Codigo) {
-        
-        this.Codigo = Codigo;
-    
     }
 
     public void setAñoEmpleo(int AñoEmpleo) {
         this.AñoEmpleo = AñoEmpleo;
     }
 
-    public int getDPcant() {
-        return DPcant;
-    }
-
-    public void setDPcant(int DPcant) {
-        this.DPcant = DPcant;
-    }
-
-    public int getAcant() {
-        return Acant;
-    }
-
-    public void setAcant(int Acant) {
-        this.Acant = Acant;
-    }
+    public String mostrar(){
     
-    
-    
-    
+        return "Codigo :"+Codigo+" Año Empleo :"+AñoEmpleo;
+        
+    }
     
 }

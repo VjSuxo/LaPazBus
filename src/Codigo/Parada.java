@@ -36,5 +36,11 @@ public class Parada {
         this.Calle = Calle;
     }
     
+    public String mostrar(){
+    
+        return "Zona :"+Zona+" Calle :"+Calle;
+        
+    }
+    
     
 }

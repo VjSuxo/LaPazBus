@@ -54,6 +54,11 @@ public class Datos {
         this.Edad = Edad;
     }
 
+    public String mostrar(){
+    
+        return "Nombre :"+Nombre+" Ci: "+Ci+" Cargo :"+Cargo+" Edad :"+Edad;
+        
+    }
     
 
 }

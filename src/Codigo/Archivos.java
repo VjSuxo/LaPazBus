@@ -66,12 +66,13 @@ public class Archivos {
         }        
       return sw;        
     }
-    public int buscarCrpt(String nombre,String cuartel){    
+    
+    public int buscarCrpt(String nombre,String direccion){    
         int sw = 0;      
-        File f = new File("LaPazBus"+"\\"+cuartel);
+        File f = new File("LaPazBus"+"\\"+direccion);
         File[] listFiles = f.listFiles();
         for (File file : listFiles) {
-            String s = "LaPazBus"+ "\\" +cuartel+"\\"+nombre;
+            String s = "LaPazBus"+ "\\" +direccion+"\\"+nombre;
             String p = file.toString();
             if(p.equals(s)){
                 System.out.println("Carpeta encontrada");
@@ -149,7 +150,10 @@ public class Archivos {
         
         try {
             File crear_archivo = new File("LaPazBus"+"\\"+carpeta,archivo);
+            System.out.println("---------------* * * * ----------------");
+            System.out.println("Nombre : "+archivo);
             System.out.println(crear_archivo);
+            System.out.println("--------------- * * * * ----------------");
                crear_archivo.createNewFile();
                 w= new FileWriter(crear_archivo);
                 bw= new BufferedWriter(w);

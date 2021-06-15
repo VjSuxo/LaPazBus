@@ -20,9 +20,10 @@ public class CParada extends javax.swing.JFrame {
      */
     DefaultTableModel modelo;
     private String direccion;
-    Archivos arch = new Archivos();
-    Parada p;
-    Pila parada = new Pila();
+    private PilaParada pilaParada = new PilaParada();
+    private Parada p ;
+    private Pila parada = new Pila();
+    private Ruta ruta = new Ruta();
     
     public CParada() {
         initComponents();
@@ -32,23 +33,13 @@ public class CParada extends javax.swing.JFrame {
         this.tabla.setModel(modelo);
     }
 
-    public String getDireccion() {
-        return direccion;
+   
+    
+    public void base(Ruta ruta){
+        this.ruta = ruta;
+        
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-        Ruta.setText(direccion);
-    }
-
-    
-    private void Agregar(){
-    
-        
-        
-    
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,7 +57,6 @@ public class CParada extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         Nombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        Ruta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(465, 470));
@@ -75,6 +65,11 @@ public class CParada extends javax.swing.JFrame {
         Zona.setBounds(20, 80, 170, 24);
 
         jButton1.setText("FINALIZAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(60, 370, 100, 32);
 
@@ -113,11 +108,6 @@ public class CParada extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(20, 110, 190, 40);
 
-        Ruta.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        Ruta.setText("Ruta");
-        getContentPane().add(Ruta);
-        Ruta.setBounds(10, 10, 210, 30);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -127,11 +117,21 @@ public class CParada extends javax.swing.JFrame {
         Info[0]=Zona.getText();
         Info[1]=Nombre.getText();
         modelo.addRow(Info);
+        p = new Parada(Zona.getText(),Nombre.getText());
+        pilaParada.adiElem(p);
         Zona.setText("");
         Nombre.setText("");
-        
-        
+                
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ruta.setP(pilaParada);
+        CRuta ru = new CRuta();
+        ru.setRuta(ruta);
+        ru.show();
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,7 +170,6 @@ public class CParada extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Nombre;
-    private javax.swing.JLabel Ruta;
     private javax.swing.JTextField Zona;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

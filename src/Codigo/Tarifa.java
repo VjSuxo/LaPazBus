@@ -43,5 +43,9 @@ public class Tarifa {
     public void setCosto(double Costo) {
         this.Costo = Costo;
     }
+    public String mostrar(){
     
+        return "Tipo pago :"+TipoPago+" Turno :"+Turno+" Costo : "+Costo;
+        
+    }
 }
