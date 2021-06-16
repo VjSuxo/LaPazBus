@@ -107,6 +107,7 @@ public class Personal extends javax.swing.JFrame {
         // TODO add your handling code here:
         CRuta cr = new CRuta();
         String x = JOptionPane.showInputDialog("Nombre de la Ruta");
+        ruta.setNombreRuta(x);
         cr.Base(x, ruta, pruta, pcontra);
         cr.show();
         this.dispose();

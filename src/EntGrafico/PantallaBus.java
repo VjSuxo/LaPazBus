@@ -619,18 +619,19 @@ public class PantallaBus extends javax.swing.JFrame {
                 String[] INFO = new String[2];
                 Vaciar();
         while(!ruta.esVacia()){
+            System.out.println("Entro primer while");
             Ruta r = ruta.eliminar();
             PilaBus pb = r.getBuses();
             PilaBus auxb = new PilaBus();
             while(!pb.esVacia()){
-            
+                System.out.println("entro segundo while");
                 Bus b  = pb.eliminar();
                 if(b.getCodigo().equals(bus.getText())){
                 
                     PilaAsiento per = b.getAsiento();
                     PilaAsiento peraux = new PilaAsiento();
                     while(!per.esVacia()){
-                
+                        System.out.println("entro tercer while");
                         Asiento data = per.eliminar();
                         if(data.isEstado().equals((String) estado.getSelectedItem() )){
                             INFO[0] = data.getTipo();

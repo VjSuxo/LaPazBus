@@ -201,6 +201,7 @@ public class CBus extends javax.swing.JFrame {
         pilaBus.adiElem(b);
         ruta.setBuses(pilaBus);
         CRuta c = new CRuta();
+        System.out.println(ruta.getNombreRuta());
         c.Base(ruta.getNombreRuta(), ruta, pilaRuta, pilaContra);
         c.show();
         this.dispose();
