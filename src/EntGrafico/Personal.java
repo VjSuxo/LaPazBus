@@ -89,7 +89,7 @@ public class Personal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton6);
-        jButton6.setBounds(110, 200, 90, 32);
+        jButton6.setBounds(110, 180, 90, 32);
 
         jButton7.setText("PARADAS");
         jButton7.addActionListener(new java.awt.event.ActionListener() {

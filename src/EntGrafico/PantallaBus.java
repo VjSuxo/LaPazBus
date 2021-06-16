@@ -29,14 +29,15 @@ public class PantallaBus extends javax.swing.JFrame {
     public PantallaBus() {
         initComponents();
         modelo = new DefaultTableModel();
-        modeloB = new DefaultTableModel();
         modelo.addColumn("CODIGO");
         modelo.addColumn("AÑO");
         modelo.addColumn("RUTA");
+        this.TABLA3.setModel(modelo);
         
+        modeloB = new DefaultTableModel();
         modeloB.addColumn("CODIGO");
         modeloB.addColumn("RUTA");
-        this.TABLA3.setModel(modelo);
+        
         this.tabla.setModel(modeloB);
         modeloA = new DefaultTableModel();
         modeloA.addColumn("TIPO");
@@ -117,6 +118,32 @@ public class PantallaBus extends javax.swing.JFrame {
     
     }
     
+    private void Vaciar3(){
+        int f = modelo.getRowCount();
+        modelo = new DefaultTableModel();
+        String[] INFO =new String[3];
+        for (int i = 0; i < f; i++) {
+            
+            INFO[0] = "";
+            INFO[1] = "";
+            INFO[2] = "";
+            modeloA.addRow(INFO);
+            
+        }
+         this.TABLA3.setModel(modelo);
+        modelo = new DefaultTableModel();
+        modelo.addColumn("CODIGO");
+        modelo.addColumn("AÑO");
+        modelo.addColumn("RUTA");
+        this.TABLA3.setModel(modelo);
+        
+    
+    }
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -139,6 +166,8 @@ public class PantallaBus extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         RUTAbus = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
@@ -230,6 +259,9 @@ public class PantallaBus extends javax.swing.JFrame {
 
         jLabel8.setText("Cuantos Buses saldran a la hora x :");
 
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel11.setText(":");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -242,7 +274,11 @@ public class PantallaBus extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -254,8 +290,10 @@ public class PantallaBus extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(30, 30, 30))
         );
@@ -628,12 +666,13 @@ public class PantallaBus extends javax.swing.JFrame {
                 Bus b  = pb.eliminar();
                 if(b.getCodigo().equals(bus.getText())){
                 
-                    PilaAsiento per = b.getAsiento();
+                    PilaAsiento pilaAsiento = b.getAsiento();
                     PilaAsiento peraux = new PilaAsiento();
-                    while(!per.esVacia()){
+                    while(!pilaAsiento.esVacia()){
                         System.out.println("entro tercer while");
-                        Asiento data = per.eliminar();
+                        Asiento data = pilaAsiento.eliminar();
                         if(data.isEstado().equals((String) estado.getSelectedItem() )){
+                            System.out.println("Entro al if----------------------------------");
                             INFO[0] = data.getTipo();
                             INFO[1] = data.isEstado();
                             modeloA.addRow(INFO);
@@ -642,8 +681,8 @@ public class PantallaBus extends javax.swing.JFrame {
                         peraux.adiElem(data);
                     
                     }
-                    per.vaciar(per);
-                    b.setAsiento(per);
+                    pilaAsiento.vaciar(peraux);
+                    b.setAsiento(pilaAsiento);
                     
                 }
                 auxb.adiElem(b);
@@ -681,6 +720,7 @@ public class PantallaBus extends javax.swing.JFrame {
             aux.adiElem(r);
         }
         ruta.vaciar(aux);   
+        Vaciar3();
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -744,6 +784,7 @@ public class PantallaBus extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -762,6 +803,7 @@ public class PantallaBus extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tabla;
     private javax.swing.JTable tablaAsiento;
     // End of variables declaration//GEN-END:variables
