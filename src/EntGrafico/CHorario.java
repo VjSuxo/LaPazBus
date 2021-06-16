@@ -20,7 +20,9 @@ public class CHorario extends javax.swing.JFrame {
     
     private DefaultTableModel modelo;
     private PilaHorario pilaHorario = new PilaHorario();
+    private PilaRuta Pruta = new PilaRuta();
     private Ruta ruta = new Ruta();
+    private PilaContratacion pilaC = new PilaContratacion();
     
     public CHorario() {
         initComponents();
@@ -30,9 +32,10 @@ public class CHorario extends javax.swing.JFrame {
         this.tabla.setModel(modelo);
     }
 
-    public void base(Ruta ruta){    
-    
-        this.ruta = ruta;
+    public void base(Ruta cruta,PilaRuta ruta,PilaContratacion pilaC){    
+        this.pilaC= pilaC;
+        this.ruta = cruta;
+        this.Pruta = ruta;
                 
     }
     
@@ -196,9 +199,8 @@ public class CHorario extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         ruta.setH(pilaHorario);
-        
         CRuta cr = new CRuta();
-        cr.setRuta(ruta);
+        cr.Base(ruta.getNombreRuta(),ruta, Pruta, pilaC);
         cr.show();
         this.dispose();
         

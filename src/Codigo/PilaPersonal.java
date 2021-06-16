@@ -52,6 +52,7 @@ public class PilaPersonal {
    
     public void adiElem(DatosPersonal data){
         if(!esLlena()){
+            System.out.println("se agrego "+data.getNombre());
            pl[tope] = data;
            tope++;
        }

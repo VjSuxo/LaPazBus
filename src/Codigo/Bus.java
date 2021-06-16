@@ -13,10 +13,10 @@ public class Bus {
     
     private PilaPersonal Dp;
     private PilaAsiento Asiento;
-    private int Codigo;
+    private String Codigo;
     private int AñoEmpleo;
     private int Hora;
-    public Bus(PilaPersonal Dp, PilaAsiento Asiento, int Codigo, int AñoEmpleo,int hora) {
+    public Bus(PilaPersonal Dp, PilaAsiento Asiento, String Codigo, int AñoEmpleo,int hora) {
         this.Dp = Dp;
         this.Asiento = Asiento;
         this.Codigo = Codigo;
@@ -48,11 +48,11 @@ public class Bus {
         this.Asiento = Asiento;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return Codigo;
     }
 
-    public void setCodigo(int Codigo) {
+    public void setCodigo(String Codigo) {
         this.Codigo = Codigo;
     }
 

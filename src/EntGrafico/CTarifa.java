@@ -19,9 +19,10 @@ public class CTarifa extends javax.swing.JFrame {
      */
     
     private DefaultTableModel modelo;
+    private PilaRuta pilaRuta = new PilaRuta();
     private Ruta ruta = new Ruta();
     private PilaTarifa pilaTarifa = new PilaTarifa();
-    
+    private PilaContratacion pilaC = new PilaContratacion();
     public CTarifa() {
         initComponents();
         modelo = new DefaultTableModel();
@@ -31,10 +32,10 @@ public class CTarifa extends javax.swing.JFrame {
         this.tabla.setModel(modelo);
     }
 
-    public void base(Ruta ruta){
-    
+    public void base(Ruta ruta,PilaRuta pilaRuta,PilaContratacion pilaC){
         this.ruta = ruta;
-        
+        this.pilaRuta = pilaRuta;
+        this.pilaC=pilaC;
     }
     
     /**
@@ -182,7 +183,7 @@ public class CTarifa extends javax.swing.JFrame {
         // TODO add your handling code here:
         ruta.setT(pilaTarifa);
         CRuta ru = new CRuta();
-        ru.setRuta(ruta);
+        ru.Base(ruta.getNombreRuta(),ruta, pilaRuta, pilaC);
         ru.show();
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

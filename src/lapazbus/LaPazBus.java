@@ -19,16 +19,24 @@ public class LaPazBus {
      */
     
     
-    static Archivos arch = new Archivos();
+   
     
     public static void main(String[] args) {
         // TODO code application logic here
- 
-        PilaRuta pr = new PilaRuta();
-        PilaRuta aux = new PilaRuta();
-     
-
+        
+        PilaRuta pilaRuta = new PilaRuta();
+        PilaContratacion pilaContratacion = new PilaContratacion();
+        
+        metodos met = new metodos();
+        
+        pilaRuta.adiElem(met.crearRutaChasquipampa());
+        pilaRuta.adiElem(met.crearRutaIncaLlojeta());
+        pilaRuta.adiElem(met.crearRutaVillaSalome());
+        
+        pilaContratacion = met.crear();
+        
         Inicio in = new Inicio();
+        in.Base(pilaRuta, pilaContratacion);
         in.show();
         
         

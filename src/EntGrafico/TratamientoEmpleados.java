@@ -1,13 +1,15 @@
+package EntGrafico;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Codigo;
+
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import Codigo.*; 
 /**
  *
  * @author Tostadora
@@ -22,9 +24,12 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
     private metodos met = new metodos();
     private PilaRuta pilaRuta = new PilaRuta();
     private PilaContratacion pilaContrato = new PilaContratacion();
-    
+    private String ciC;
+    private String codigoB;
+    private int indi=0;
     public TratamientoEmpleados() {
         initComponents();
+        jButton4.setEnabled(false);
         modeloEmp = new DefaultTableModel();
         modeloEmp.addColumn("Ci");
         modeloEmp.addColumn("Nombre");
@@ -91,7 +96,7 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
     }
     
         public void CargarBus(){
-    
+            System.out.println("x");
         PilaRuta aux = new PilaRuta();
         
         while(!pilaRuta.esVacia()){
@@ -105,7 +110,7 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
                 String[] INFO = new String[1];
                 INFO[0] = String.valueOf(b.getCodigo());
                 modeloBus.addRow(INFO);
-                tablaBus.setModel(modeloEmp);
+                tablaBus.setModel(modeloBus);
                 pilaBaux.adiElem(b);
             }
             pilaBus.vaciar(pilaBaux);
@@ -113,27 +118,30 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
             aux.adiElem(ruta);
         }
         pilaRuta.vaciar(aux);
-        
+            System.out.println("c");
     }
         
     public void CargarContrato(){
-    
+        
+        
         PilaContratacion pilaCaux = new PilaContratacion();
         String[] INFO  = new String[2];
         while(!pilaContrato.esVacia()){
+            
             Postulante contrato = pilaContrato.eliminar();
             
             if(contrato.getCargo().equals("conductor")){
                 INFO[0] = contrato.getCi();
                 INFO[1] = contrato.getNombre();
+                indi++;
                 modeloCon.addRow(INFO);
-                tablaConductor.setModel(modeloEmp);
+                tablaConductor.setModel(modeloCon);
             }
             else{
                 INFO[0] = contrato.getCi();
                 INFO[1] = contrato.getNombre();
                 modeloAnd.addRow(INFO);
-                tablaEmpleados.setModel(modeloEmp);
+                tablaAnfitrion.setModel(modeloAnd);
             }
             
             pilaCaux.adiElem(contrato);
@@ -143,7 +151,65 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
                 
     }    
     
+    public void vaciar(){
+        String[] INFO = new String[2];
+        modeloCon = new DefaultTableModel();
+        int c = modeloCon.getRowCount();
+        for (int i = 0; i < c; i++) {
+            INFO[0] = "";
+            INFO[1] = "";
+            modeloCon.addRow(INFO);
+        }
     
+            tablaConductor.setModel(modeloCon);
+        
+        c = modeloAnd.getRowCount();
+        modeloAnd = new DefaultTableModel();
+        
+        for (int i = 0; i < c; i++) {
+            INFO[0] = "";
+            INFO[1] = "";
+            modeloAnd.addRow(INFO);
+        }
+        tablaAnfitrion.setModel(modeloAnd);
+       
+        
+        modeloCon = new DefaultTableModel();
+        modeloCon.addColumn("Ci");
+        modeloCon.addColumn("Nombre");
+        this.tablaConductor.setModel(modeloCon);
+        
+        modeloAnd = new DefaultTableModel();
+        modeloAnd.addColumn("Ci");
+        modeloAnd.addColumn("Nombre");
+        this.tablaAnfitrion.setModel(modeloAnd);
+        
+        modeloBus = new DefaultTableModel();
+        modeloBus.addColumn("Codigo");
+        this.tablaBus.setModel(modeloBus);
+        
+        jButton4.setEnabled(false);
+        asig.setEnabled(false);
+    }
+    
+    
+    public void vaiarEmp(){
+        int c = modeloEmp.getRowCount();
+        modeloEmp = new DefaultTableModel();
+        String[] INFO = new String[2];
+        for (int i = 0; i < c; i++) {
+            INFO[0] = "";
+            INFO[1] = "";
+            modeloEmp.addRow(INFO);
+        }
+        tablaEmpleados.setModel(modeloEmp);
+             
+        modeloEmp = new DefaultTableModel();
+        modeloEmp.addColumn("Ci");
+        modeloEmp.addColumn("Nombre");
+        this.tablaEmpleados.setModel(modeloEmp);
+        
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -175,6 +241,7 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablaBus = new javax.swing.JTable();
+        asig = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
@@ -370,7 +437,13 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(tablaBus);
 
-        jButton5.setText("ASIGNAR");
+        asig.setText("ASIGNAR");
+        asig.setEnabled(false);
+        asig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asigActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -380,18 +453,25 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                    .addComponent(asig))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jButton5)
+                .addComponent(asig)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5)
-                .addContainerGap())
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jButton5.setText("REGRESAR");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -413,15 +493,20 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -432,7 +517,12 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
                             .addComponent(jButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -441,9 +531,8 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        vaiarEmp();
         CargarEmpleados();
-        
-        
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -451,10 +540,9 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
         // TODO add your handling code here:
         String ci = "";
         
-        do{
-        ci = JOptionPane.showInputDialog("Ingrese Ci a eliminar :");
-        }while(ci.equals(""));
         
+        ci = JOptionPane.showInputDialog("Ingrese Ci a eliminar :");
+       
         PilaRuta pilaRaux = new PilaRuta();
         
         while(!pilaRuta.esVacia()){
@@ -474,20 +562,84 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
         
         }
         pilaRuta.vaciar(pilaRaux);
+        vaiarEmp();
         
-        CargarEmpleados();
+       
        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:\
+        jButton4.setEnabled(true);
         CargarContrato();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
+        int filaCon = tablaConductor.getSelectedRow(); 
+        int filaAn  = tablaAnfitrion.getSelectedRow();
+        
+        if(filaCon!=-1){
+            System.out.println(modeloCon.getValueAt(filaCon,0));
+            ciC = (String) modeloCon.getValueAt(filaCon,0);
+            asig.setEnabled(true);
+            CargarBus();
+        }
+        else{
+            if(filaAn!=-1){
+                System.out.println(modeloAnd.getValueAt(filaAn,0));
+                ciC = (String) modeloAnd.getValueAt(filaAn,0);
+                asig.setEnabled(true);
+                CargarBus();
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Seleccione a un postulante de las tablas");
+            }
+        }
+        
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void asigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asigActionPerformed
+        // TODO add your handling code here:
+        
+        
+        int filaAn  = tablaBus.getSelectedRow();
+        
+        if(filaAn!=-1){
+            System.out.println(modeloBus.getValueAt(filaAn,0));
+            codigoB = (String) modeloBus.getValueAt(filaAn,0);
+           
+        }
+        
+        
+        
+        pilaRuta = met.contratar(pilaRuta, pilaContrato, ciC, codigoB);
+        
+         PilaContratacion pilaCaux  = new PilaContratacion();
+         Postulante data = null;
+         
+         while(!pilaContrato.esVacia()){
+             Postulante pos = pilaContrato.eliminar();
+             if(!ciC.equals(pos.getCi())){
+                pilaCaux.adiElem(pos);
+             }
+         }
+         pilaContrato.vaciar(pilaCaux);
+        vaiarEmp();
+        CargarEmpleados();
+        vaciar();
+    }//GEN-LAST:event_asigActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        Personal p = new Personal();
+        p.setRuta(pilaRuta, pilaContrato);
+        p.show();
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -525,6 +677,7 @@ public class TratamientoEmpleados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton asig;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

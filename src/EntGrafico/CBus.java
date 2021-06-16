@@ -22,16 +22,19 @@ public class CBus extends javax.swing.JFrame {
         initComponents();
     }
 
-    PilaPersonal pilaPersonal = new PilaPersonal();
-    PilaAsiento pilaAsiento = new PilaAsiento();
-    PilaBus pilaBus = new PilaBus();
-    
-    Ruta ruta;
+    private PilaRuta pilaRuta = new PilaRuta();
+    private PilaPersonal pilaPersonal = new PilaPersonal();
+    private PilaAsiento pilaAsiento = new PilaAsiento();
+    private PilaBus pilaBus = new PilaBus();
+    private PilaContratacion pilaContra = new PilaContratacion();
+    private Ruta ruta;
     
     String codigo;
     String añoEmpleo;
-    public void Base(Ruta ruta){
-        this.ruta = ruta;
+    public void Base(Ruta cruta,PilaRuta ruta,PilaContratacion pilaC){
+        this.pilaRuta = ruta;
+        this.ruta = cruta;
+        this.pilaContra = pilaC;
         this.codigo = JOptionPane.showInputDialog("Ingrese codigo del bus");
         this.añoEmpleo = JOptionPane.showInputDialog("Ingrese año de empleo");
     }
@@ -82,7 +85,7 @@ public class CBus extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(5, 80, 170, 32);
+        jButton1.setBounds(10, 20, 170, 32);
 
         jButton2.setText("AGREGAR PERSONAL");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +103,7 @@ public class CBus extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(340, 280, 100, 30);
+        jButton4.setBounds(160, 280, 100, 30);
 
         jLabel1.setText("Nombre :");
         getContentPane().add(jLabel1);
@@ -124,9 +127,10 @@ public class CBus extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(210, 90, 60, 50);
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setText("Hora :");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 250, 40, 40);
+        jLabel4.setBounds(10, 140, 70, 40);
         getContentPane().add(JEdad);
         JEdad.setBounds(270, 140, 180, 24);
         getContentPane().add(jSeparator1);
@@ -146,7 +150,7 @@ public class CBus extends javax.swing.JFrame {
             }
         });
         getContentPane().add(hora);
-        hora.setBounds(40, 260, 80, 24);
+        hora.setBounds(80, 150, 80, 24);
 
         jLabel5.setText("Edad :");
         getContentPane().add(jLabel5);
@@ -193,12 +197,11 @@ public class CBus extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
-        Bus b = new Bus(pilaPersonal, pilaAsiento,Integer.parseInt(codigo),Integer.parseInt(añoEmpleo),Integer.parseInt(hora.getText()));
+        Bus b = new Bus(pilaPersonal, pilaAsiento,codigo,Integer.parseInt(añoEmpleo),Integer.parseInt(hora.getText()));
         pilaBus.adiElem(b);
         ruta.setBuses(pilaBus);
-        
         CRuta c = new CRuta();
-        c.setRuta(ruta);
+        c.Base(ruta.getNombreRuta(), ruta, pilaRuta, pilaContra);
         c.show();
         this.dispose();
             

@@ -20,6 +20,9 @@ public class CParada extends javax.swing.JFrame {
      */
     DefaultTableModel modelo;
     private String direccion;
+    private PilaRuta pilaRuta = new PilaRuta();
+    private PilaContratacion pilaC = new PilaContratacion();
+    
     private PilaParada pilaParada = new PilaParada();
     private Parada p ;
     private Pila parada = new Pila();
@@ -35,8 +38,10 @@ public class CParada extends javax.swing.JFrame {
 
    
     
-    public void base(Ruta ruta){
-        this.ruta = ruta;
+    public void base(Ruta cruta,PilaRuta ruta,PilaContratacion pilaC){
+        this.pilaRuta = ruta;
+        this.ruta = cruta;
+        this.pilaC = pilaC;
         
     }
 
@@ -127,8 +132,9 @@ public class CParada extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         ruta.setP(pilaParada);
+        
         CRuta ru = new CRuta();
-        ru.setRuta(ruta);
+        ru.Base(ruta.getNombreRuta(),ruta,pilaRuta, pilaC);
         ru.show();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

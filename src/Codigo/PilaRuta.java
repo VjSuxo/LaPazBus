@@ -86,6 +86,7 @@ public class PilaRuta {
            System.out.println("---------------------Tarifa");
            data.getT().mostrar();
            System.out.println("-------------------------------");
+           
            aux.adiElem(data);
        }
        this.vaciar(aux);

@@ -5,6 +5,8 @@
  */
 package EntGrafico;
 
+import Codigo.*;
+
 /**
  *
  * @author Tostadora
@@ -14,8 +16,19 @@ public class Inicio extends javax.swing.JFrame {
     /**
      * Creates new form Inicio
      */
+    
+    private PilaRuta pilaRuta = new PilaRuta();
+    private PilaContratacion pilaContrato = new PilaContratacion();
+    
     public Inicio() {
         initComponents();
+    }
+    
+    public void Base(PilaRuta pilaRuta,PilaContratacion pilaContrato){
+    
+        this.pilaContrato = pilaContrato;
+        this.pilaRuta = pilaRuta;
+    
     }
 
     /**
@@ -70,12 +83,17 @@ public class Inicio extends javax.swing.JFrame {
     private void PRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PRSActionPerformed
         // TODO add your handling code here:
         Personal pr = new Personal();
+        pr.setRuta(pilaRuta, pilaContrato);
         pr.show();
         this.dispose();
     }//GEN-LAST:event_PRSActionPerformed
 
     private void USRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_USRActionPerformed
         // TODO add your handling code here:
+        CContrato cc = new CContrato();
+        cc.Base(pilaContrato, pilaRuta);
+        cc.show();
+        this.dispose();
     }//GEN-LAST:event_USRActionPerformed
 
     /**

@@ -22,17 +22,19 @@ public class Personal extends javax.swing.JFrame {
     }
 
     private PilaRuta pruta = new PilaRuta();
-
+    private PilaContratacion pcontra = new PilaContratacion();
     private Ruta ruta = new Ruta();
     
     public PilaRuta getRuta() {
         return pruta;
     }
 
-    public void setRuta(PilaRuta ruta) {
+    public void setRuta(PilaRuta ruta, PilaContratacion contra) {
         this.pruta = ruta;
+        this.pcontra = contra;
     }
     
+  
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,13 +71,23 @@ public class Personal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(20, 60, 160, 32);
+        jButton2.setBounds(20, 50, 160, 32);
 
         jButton4.setText("EMPLEADOS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4);
-        jButton4.setBounds(20, 150, 160, 32);
+        jButton4.setBounds(20, 130, 160, 32);
 
         jButton6.setText("MENU");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton6);
         jButton6.setBounds(110, 200, 90, 32);
 
@@ -86,7 +98,7 @@ public class Personal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton7);
-        jButton7.setBounds(20, 110, 160, 32);
+        jButton7.setBounds(20, 90, 160, 32);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -95,19 +107,42 @@ public class Personal extends javax.swing.JFrame {
         // TODO add your handling code here:
         CRuta cr = new CRuta();
         String x = JOptionPane.showInputDialog("Nombre de la Ruta");
-        
-        cr.setRuta(ruta);
+        cr.Base(x, ruta, pruta, pcontra);
         cr.show();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        PantallaBus pant = new PantallaBus();
+        pant.base(pruta, pcontra);
+        pant.show();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        PantParada pa = new PantParada();
+        pa.Base(pruta, pcontra);
+        pa.show();
+        this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        Inicio ini = new Inicio();
+        ini.Base(pruta, pcontra);
+        ini.show();
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        TratamientoEmpleados tra = new TratamientoEmpleados();
+        tra.Base(pruta, pcontra);
+        tra.show();
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
