@@ -19,6 +19,7 @@ public class Personal extends javax.swing.JFrame {
      */
     public Personal() {
         initComponents();
+        this.setSize(281, 321);
     }
 
     private PilaRuta pruta = new PilaRuta();
@@ -50,9 +51,10 @@ public class Personal extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(261, 349));
+        setMinimumSize(new java.awt.Dimension(281, 321));
         getContentPane().setLayout(null);
 
         jButton1.setText("CREAR RUTA");
@@ -62,7 +64,7 @@ public class Personal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(20, 10, 160, 32);
+        jButton1.setBounds(60, 20, 160, 32);
 
         jButton2.setText("BUS");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +73,7 @@ public class Personal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(20, 50, 160, 32);
+        jButton2.setBounds(60, 60, 160, 32);
 
         jButton4.setText("EMPLEADOS");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +82,7 @@ public class Personal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(20, 130, 160, 32);
+        jButton4.setBounds(60, 160, 160, 32);
 
         jButton6.setText("MENU");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +91,7 @@ public class Personal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton6);
-        jButton6.setBounds(110, 180, 90, 32);
+        jButton6.setBounds(170, 210, 90, 32);
 
         jButton7.setText("PARADAS");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +100,11 @@ public class Personal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton7);
-        jButton7.setBounds(20, 90, 160, 32);
+        jButton7.setBounds(60, 110, 160, 32);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lapazbus/img/PUMA-Y-CHIQUITITI-SEP.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(-190, 0, 550, 320);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -186,5 +192,6 @@ public class Personal extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

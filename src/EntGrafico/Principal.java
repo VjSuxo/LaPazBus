@@ -5,6 +5,10 @@
  */
 package EntGrafico;
 
+import Codigo.PilaContratacion;
+import Codigo.PilaRuta;
+import Codigo.metodos;
+
 /**
  *
  * @author Lilo
@@ -63,14 +67,30 @@ public class Principal extends javax.swing.JFrame {
     public static void main(String args[]) {
         Principal p = new Principal();
         p.setVisible(true);
+        metodos met = new metodos();
+        PilaRuta pilaRuta = new PilaRuta();
+        pilaRuta.adiElem(met.crearRutaChasquipampa());
+        pilaRuta.adiElem(met.crearRutaIncaLlojeta());
+        pilaRuta.adiElem(met.crearRutaVillaSalome());
+        PilaContratacion pilaContratacion = new PilaContratacion();
+        pilaContratacion = met.crear();
+        String[] data = met.Mostrar(pilaRuta);
+        int indi=0;
         try{
             for(int i=0;i<=100;i++){
                 Thread.sleep (125);
                 p.ProgressBar.setValue(i);
-                p.Lblcarga.setText("Cargando sistema espere porfavor..."+(Integer.toString(i)+"%"));
+                if(indi==57){
+                
+                    indi=0;
+                }
+                p.Lblcarga.setText("Cargando sistema espere porfavor..."+(Integer.toString(i)+"% ..."+data[indi]));
+                indi++;
                 if(i==100){
                     p.setVisible(false);
+                    
                     Inicio in = new Inicio();
+                    in.Base(pilaRuta, pilaContratacion);
                     in.setVisible(true);
                     
                 }

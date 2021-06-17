@@ -20,9 +20,10 @@ public class metodos {
          
         PilaBus b = new PilaBus();
         PilaBus c = new PilaBus();
+        Bus bus = null;
         while(!pilaBus.esVacia()){
         
-            Bus bus = pilaBus.eliminar();
+            bus = pilaBus.eliminar();
             while(!pilaBus.esVacia()){
             
                 Bus data = pilaBus.eliminar();
@@ -34,9 +35,10 @@ public class metodos {
                     b.adiElem(data);
                 }
             }
-            c.adiElem(bus);
-            pilaBus.vaciar(b);
+            
         }
+        c.adiElem(bus);
+        pilaBus.vaciar(b);
         pilaBus.vaciar(c);
         return pilaBus;
      
@@ -106,7 +108,18 @@ public class metodos {
      }
      
     
-         
+     public boolean Buscar(String[] v,String x){
+     
+         for (int i = 0; i < 100; i++) {
+             if(v[i].equals(x)){
+             
+                 return true;
+                 
+             }
+         }
+         return false;
+     
+     }    
      
      
      private Postulante buscar(PilaContratacion pilaCon,String ci){
@@ -274,8 +287,6 @@ public class metodos {
          
          return ruta;
      }
-     
-     
      
      public Ruta crearRutaVillaSalome(){
          
@@ -607,6 +618,12 @@ public class metodos {
      }
       
       
+      
+      
+      
+      
+      
+      
      public PilaContratacion crear(){
      
          PilaContratacion pl = new PilaContratacion();
@@ -626,5 +643,70 @@ public class metodos {
         return pl;            
      } 
       
+     public String[] Mostrar(PilaRuta pilaRuta){
+        String[] data = new String[101];
+         PilaRuta pilaRaux = new PilaRuta();
+         int indice = 0;
+         while(!pilaRuta.esVacia()){
+             
+             Ruta r = pilaRuta.eliminar();
+             
+             if(indice<100){
+                 data[indice]= r.getNombreRuta();
+                indice++;
+             }
+             System.out.println(indice);
+             PilaParada pilaParada = r.getP();
+             PilaParada pilaPaux = new PilaParada();
+             while(!pilaParada.esVacia()){
+             
+                 Parada p = pilaParada.eliminar();
+                 System.out.println(indice);
+                 if(indice<100){
+                     data[indice] = p.getZona();
+                      data[indice] = p.getCalle();
+                    indice++;
+                 }
+                
+                 
+                 pilaPaux.adiElem(p);
+             }
+             r.setP(pilaPaux);
+             pilaRaux.adiElem(r);
+         }
+         pilaRuta.vaciar(pilaRaux);
+         
+         
+         if(indice<100){
+          while(!pilaRuta.esVacia()){
+             
+             Ruta r = pilaRuta.eliminar();
+             PilaBus pilaBus = r.getBuses();
+             PilaBus pilaBaux = new PilaBus();
+             while(!pilaBus.esVacia()){
+                 
+                 Bus b = pilaBus.eliminar();
+                 if(indice<=100){
+                  data[indice]=b.getCodigo();
+                  indice++;
+                 }
+                
+                 pilaBaux.adiElem(b);
+             }
+             pilaBus.vaciar(pilaBaux);
+             r.setBuses(pilaBus);
+             pilaRaux.adiElem(r);
+          }
+         pilaRuta.vaciar(pilaRaux);
+         
+            
+             
+         }
+         System.out.println(indice);
+     
+     return data;
+     
+     }
+     
      
 }

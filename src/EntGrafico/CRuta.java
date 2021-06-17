@@ -21,6 +21,7 @@ public class CRuta extends javax.swing.JFrame {
     public CRuta() {
        
         initComponents();
+        this.setSize(184, 271);
     }
     private PilaRuta pilaRuta = new PilaRuta();
     private PilaContratacion pilaContrato = new PilaContratacion();
@@ -76,7 +77,7 @@ public class CRuta extends javax.swing.JFrame {
         LbRuta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(295, 340));
+        setMinimumSize(new java.awt.Dimension(174, 261));
         getContentPane().setLayout(null);
 
         jButton1.setText("CREAR BUS");
@@ -86,7 +87,7 @@ public class CRuta extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(30, 40, 180, 32);
+        jButton1.setBounds(20, 30, 130, 32);
 
         jButton2.setText("CREAR PARADA");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +96,7 @@ public class CRuta extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(30, 80, 180, 32);
+        jButton2.setBounds(20, 70, 120, 32);
 
         jButton3.setText("GENERAR HORARIO");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +105,7 @@ public class CRuta extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(30, 130, 180, 32);
+        jButton3.setBounds(20, 110, 140, 32);
 
         jButton4.setText("GENERAR TARIFA");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +114,7 @@ public class CRuta extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(30, 180, 180, 32);
+        jButton4.setBounds(20, 150, 140, 32);
 
         jButton5.setText("FINALIZAR");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -122,11 +123,11 @@ public class CRuta extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(70, 230, 110, 32);
+        jButton5.setBounds(20, 190, 110, 32);
 
         LbRuta.setText("Nombre Ruta");
         getContentPane().add(LbRuta);
-        LbRuta.setBounds(10, 0, 230, 40);
+        LbRuta.setBounds(10, 0, 110, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

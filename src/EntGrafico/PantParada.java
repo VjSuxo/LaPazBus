@@ -7,6 +7,7 @@ package EntGrafico;
 
 import Codigo.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,15 +20,75 @@ public class PantParada extends javax.swing.JFrame {
      */
     private PilaRuta ruta = new PilaRuta();
     private PilaContratacion pilaC = new PilaContratacion();
+    private DefaultTableModel modelo;
     public PantParada() {
         initComponents();
+        modelo = new DefaultTableModel();
+        modelo.addColumn("RUTA");
+        this.tabla.setModel(modelo);
     }
     
-    String x;
+    private String x;
     public void Base(PilaRuta pl,PilaContratacion pilaC){
         this.pilaC = pilaC;
         this.ruta = pl;
-        x = JOptionPane.showInputDialog("Ingrese parada");
+        Cargar();
+    }
+    
+    private void Cargar(){
+        metodos met = new metodos();
+        String[] v = new String[100];
+        PilaRuta pilaRaux = new PilaRuta();
+        int i = 0;
+        
+        for (int j = 0; j < 100; j++) {
+            v[j]="";
+        }
+        
+        while(!ruta.esVacia()){
+        
+            Ruta r = ruta.eliminar();
+            PilaParada pilaParada = r.getP();
+            PilaParada pilaPaux = new PilaParada();
+            while(!pilaParada.esVacia()){            
+                Parada p = pilaParada.eliminar();                
+                String calle = p.getCalle();
+                if(!met.Buscar(v, calle)){
+                
+                    v[i]=calle;
+                    i++;
+                }
+                pilaPaux.adiElem(p);
+                
+            }
+            pilaParada.vaciar(pilaPaux);
+            r.setP(pilaParada);
+            pilaRaux.adiElem(r);
+        }
+        ruta.vaciar(pilaRaux);
+    
+        
+        for (int j = 0; j < i; j++) {
+            Cruta.addItem(v[j]);
+        }
+        
+        
+    }
+    
+    private void Vaciar(){
+    
+        int f= modelo.getRowCount();
+        modelo = new DefaultTableModel();
+        for (int i = 0; i < f; i++) {
+            String[] x = {""};
+            modelo.addRow(x);
+        }
+        tabla.setModel(modelo);
+        
+        modelo = new DefaultTableModel();
+        modelo.addColumn("RUTA");
+        this.tabla.setModel(modelo);
+    
     }
     
     /**
@@ -40,9 +101,10 @@ public class PantParada extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        area = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
+        Cruta = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,10 +115,6 @@ public class PantParada extends javax.swing.JFrame {
             }
         });
 
-        area.setColumns(20);
-        area.setRows(5);
-        jScrollPane1.setViewportView(area);
-
         jButton2.setText("Regresar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,32 +122,52 @@ public class PantParada extends javax.swing.JFrame {
             }
         });
 
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tabla);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addComponent(Cruta, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(56, 56, 56))))
+                .addComponent(Cruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(20, 20, 20))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -97,7 +175,9 @@ public class PantParada extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String priin = "";
+        Vaciar();
+        String[] priin = new String[1];
+        
         PilaRuta aux = new PilaRuta();
         while(!ruta.esVacia()){
         
@@ -106,9 +186,11 @@ public class PantParada extends javax.swing.JFrame {
             PilaParada paux = new PilaParada();
             while(!p.esVacia()){
                 Parada pa = p.eliminar();
-                if(pa.getCalle().equals(x)){
+                if(pa.getCalle().equals((String)Cruta.getSelectedItem())){
                 
-                    priin+="\n"+r.getNombreRuta();
+                    priin[0]=r.getNombreRuta();
+                    modelo.addRow(priin);
+                    tabla.setModel(modelo);
                 }
                 paux.adiElem(pa);
             }
@@ -118,7 +200,6 @@ public class PantParada extends javax.swing.JFrame {
         }
         
         ruta.vaciar(aux);
-        area.setText(priin);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -166,9 +247,10 @@ public class PantParada extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea area;
+    private javax.swing.JComboBox<String> Cruta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

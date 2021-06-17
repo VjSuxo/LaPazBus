@@ -41,14 +41,24 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         PRS = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         USR = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("INICIO");
+        setBackground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(193, 297));
         getContentPane().setLayout(null);
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("USUARIO");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(110, 60, 130, 50);
 
         PRS.setText("ENTRAR");
         PRS.addActionListener(new java.awt.event.ActionListener() {
@@ -57,17 +67,14 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(PRS);
-        PRS.setBounds(130, 210, 90, 40);
+        PRS.setBounds(120, 200, 90, 40);
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("ADMINISTRACIÓN DE PERSONAL");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 150, 310, 50);
-
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setText("USUARIO");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(130, 20, 130, 50);
+        jLabel1.setBounds(20, 150, 310, 50);
 
         USR.setText("ENTRAR");
         USR.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +83,11 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(USR);
-        USR.setBounds(130, 90, 90, 40);
+        USR.setBounds(120, 110, 90, 40);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lapazbus/img/images.jpg"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(-10, 0, 370, 50);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -137,5 +148,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton USR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
