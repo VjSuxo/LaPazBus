@@ -16,6 +16,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setSize(511, 294);
         setLocationRelativeTo(null);//Centramos nuestro Formulario
     }
 
@@ -28,21 +29,30 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
         lblcarga = new javax.swing.JLabel();
         ProgressBar = new javax.swing.JProgressBar();
+        jLabel1 = new javax.swing.JLabel();
+        Lblcarga = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(null);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lapazbus/img/img_05.png"))); // NOI18N
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(-1, -20, 510, 330);
         getContentPane().add(lblcarga);
         lblcarga.setBounds(332, 292, 180, 0);
+
+        ProgressBar.setForeground(new java.awt.Color(255, 153, 51));
+        ProgressBar.setBorder(null);
         getContentPane().add(ProgressBar);
-        ProgressBar.setBounds(0, 262, 512, 12);
+        ProgressBar.setBounds(0, 280, 512, 12);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lapazbus/img/img_05.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 510, 260);
+
+        Lblcarga.setText("jLabel2");
+        getContentPane().add(Lblcarga);
+        Lblcarga.setBounds(0, 260, 510, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -57,7 +67,7 @@ public class Principal extends javax.swing.JFrame {
             for(int i=0;i<=100;i++){
                 Thread.sleep (125);
                 p.ProgressBar.setValue(i);
-                p.lblcarga.setText("Cargando sistema espere porfavor..."+(Integer.toString(i)+"%"));
+                p.Lblcarga.setText("Cargando sistema espere porfavor..."+(Integer.toString(i)+"%"));
                 if(i==100){
                     p.setVisible(false);
                     Inicio in = new Inicio();
@@ -71,8 +81,9 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Lblcarga;
     private javax.swing.JProgressBar ProgressBar;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblcarga;
     // End of variables declaration//GEN-END:variables
 }

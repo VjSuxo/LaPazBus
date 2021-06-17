@@ -22,6 +22,7 @@ public class Inicio extends javax.swing.JFrame {
     
     public Inicio() {
         initComponents();
+        this.setSize(364, 297);
     }
     
     public void Base(PilaRuta pilaRuta,PilaContratacion pilaContrato){

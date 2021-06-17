@@ -7,6 +7,7 @@ package lapazbus;
 
 import Codigo.*;
 import EntGrafico.Inicio;
+import EntGrafico.Principal;
 
 /**
  *
@@ -35,10 +36,8 @@ public class LaPazBus {
         
         pilaContratacion = met.crear();
         
-        Inicio in = new Inicio();
-        in.Base(pilaRuta, pilaContratacion);
-        in.show();
-        
+        Principal p = new Principal();
+        p.show();
         
       
         
