@@ -74,7 +74,7 @@ public class Principal extends javax.swing.JFrame {
         p.setVisible(true);
         try{
             for(int i=0;i<=100;i++){
-                Thread.sleep (50);
+                Thread.sleep (125);
                 p.ProgressBar.setValue(i);
                 p.lblcarga.setText("Cargando sistema espere porfavor..."+(Integer.toString(i)+"%"));
                 if(i==100){
