@@ -56,17 +56,17 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(PRS);
-        PRS.setBounds(40, 200, 90, 40);
+        PRS.setBounds(130, 210, 90, 40);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("PERSONAL");
+        jLabel1.setText("ADMINISTRACIÓN DE PERSONAL");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(40, 150, 130, 50);
+        jLabel1.setBounds(30, 150, 310, 50);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("USUARIO");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(50, 30, 130, 50);
+        jLabel2.setBounds(130, 20, 130, 50);
 
         USR.setText("ENTRAR");
         USR.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +75,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(USR);
-        USR.setBounds(40, 70, 90, 40);
+        USR.setBounds(130, 90, 90, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

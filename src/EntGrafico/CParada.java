@@ -98,7 +98,7 @@ public class CParada extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(20, 50, 190, 40);
 
-        jButton2.setText("ARGEGAR");
+        jButton2.setText("AGREGAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

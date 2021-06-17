@@ -124,7 +124,7 @@ public class CRuta extends javax.swing.JFrame {
         getContentPane().add(jButton5);
         jButton5.setBounds(70, 230, 110, 32);
 
-        LbRuta.setText("Nombre RUta");
+        LbRuta.setText("Nombre Ruta");
         getContentPane().add(LbRuta);
         LbRuta.setBounds(10, 0, 230, 40);
 

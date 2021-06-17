@@ -61,6 +61,11 @@ public class CTarifa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tipoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Preferencial", "Tarjeta", "Universitario" }));
+        tipoPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoPagoActionPerformed(evt);
+            }
+        });
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,6 +192,10 @@ public class CTarifa extends javax.swing.JFrame {
         ru.show();
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tipoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoPagoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipoPagoActionPerformed
 
     /**
      * @param args the command line arguments

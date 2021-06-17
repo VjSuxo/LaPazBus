@@ -35,8 +35,8 @@ public class CBus extends javax.swing.JFrame {
         this.pilaRuta = ruta;
         this.ruta = cruta;
         this.pilaContra = pilaC;
-        this.codigo = JOptionPane.showInputDialog("Ingrese codigo del bus");
-        this.añoEmpleo = JOptionPane.showInputDialog("Ingrese año de empleo");
+        this.codigo = JOptionPane.showInputDialog("Ingrese codigo del bus (Placa)");
+        this.añoEmpleo = JOptionPane.showInputDialog("¿En qué año se compró el bus?");
     }
 
     /**
@@ -67,6 +67,8 @@ public class CBus extends javax.swing.JFrame {
         hora = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cargo = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         jButton3.setText("jButton3");
 
@@ -138,7 +140,7 @@ public class CBus extends javax.swing.JFrame {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator2);
-        jSeparator2.setBounds(470, 0, 20, 330);
+        jSeparator2.setBounds(470, 0, 20, 250);
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator3);
@@ -150,7 +152,7 @@ public class CBus extends javax.swing.JFrame {
             }
         });
         getContentPane().add(hora);
-        hora.setBounds(80, 150, 80, 24);
+        hora.setBounds(70, 150, 40, 24);
 
         jLabel5.setText("Edad :");
         getContentPane().add(jLabel5);
@@ -159,6 +161,19 @@ public class CBus extends javax.swing.JFrame {
         cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "conductor", "anfitrion" }));
         getContentPane().add(cargo);
         cargo.setBounds(270, 100, 180, 26);
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        jLabel6.setText(":");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(120, 150, 30, 20);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(130, 150, 50, 24);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -174,7 +189,10 @@ public class CBus extends javax.swing.JFrame {
             Asiento a = new Asiento("libre", "preferencial",true);
             pilaAsiento.adiElem(a);
         }
-        
+        for (int i = 0; i < 5; i++) {
+            Asiento a = new Asiento("Ocupado", "normal",true);
+            pilaAsiento.adiElem(a);
+        }
         System.out.println("Se genero");
            
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -211,7 +229,12 @@ public class CBus extends javax.swing.JFrame {
 
     private void horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_horaActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,10 +286,12 @@ public class CBus extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
