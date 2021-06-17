@@ -54,11 +54,11 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("USUARIO");
+        jLabel2.setText("SOLICITUDES DE TRABAJO");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(110, 60, 130, 50);
+        jLabel2.setBounds(50, 60, 380, 50);
 
         PRS.setText("ENTRAR");
         PRS.addActionListener(new java.awt.event.ActionListener() {
